@@ -11,7 +11,7 @@ namespace MarkovTest.ObjectPool
         /// <summary>
         /// Pool elements
         /// </summary>
-        private readonly List<ObjectPoolElement<T>> _elements = new();
+        private readonly List<ObjectPoolElement<T>> _elements = new List<ObjectPoolElement<T>>();
 
         /// <summary>
         /// Return All elements to pool
