@@ -14,7 +14,7 @@ namespace MarkovTest.ObjectPool
         /// <summary>
         /// Wrapped element, that will be used in pool
         /// </summary>
-        public T Value { get; init; }
+        public T Value { get; }
 
         /// <summary>
         /// Return element to ObjectPool

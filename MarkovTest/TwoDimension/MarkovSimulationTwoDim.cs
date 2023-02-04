@@ -39,7 +39,7 @@ namespace MarkovTest.TwoDimension
         /// <summary>
         /// Size of the simulation
         /// </summary>
-        public Vector2Int Size { get; init; }
+        public Vector2Int Size { get;  }
 
         /// <summary>
         /// Value of the current point inside simulation
@@ -54,7 +54,7 @@ namespace MarkovTest.TwoDimension
         /// <param name="coords">coords inside simulation</param>
         public T this[Vector2Int coords] => Simulation[coords.X, coords.Y];
 
-        public int? Seed { get; init; }
+        public int? Seed { get;  }
 
         /// <summary>
         /// </summary>
