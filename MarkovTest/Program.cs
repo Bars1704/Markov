@@ -1,5 +1,4 @@
-﻿using System.Text.Json;
-using MarkovTest.TwoDimension;
+﻿using MarkovTest.TwoDimension;
 using MarkovTest.TwoDimension.Patterns;
 using MarkovTest.TwoDimension.Rules;
 using MarkovTest.TwoDimension.Sequences;
