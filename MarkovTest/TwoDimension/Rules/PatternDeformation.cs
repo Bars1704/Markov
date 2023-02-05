@@ -33,7 +33,7 @@ namespace MarkovTest.TwoDimension.Rules
 
         public override int GetHashCode()
         {
-            return HashCode.Combine((int)RotationAngle, FlipX, FlipY);
+            return ((int)RotationAngle, FlipX, FlipY).GetHashCode();
         }
 
         public static bool operator ==(PatternDeformation left, PatternDeformation right)

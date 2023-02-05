@@ -60,8 +60,9 @@ namespace MarkovTest.TwoDimension.Rules
 
             var patternList = new List<(PatternDeformation, Pattern<T>)>(Patterns.Count);
             if (RotationSettings.HasFlag(RotationSettingsFlags.FlipX))
-                foreach (var (s, p) in Patterns)
+                foreach (var pattern in Patterns)
                 {
+                    var (s, p) = (pattern.Key, pattern.Value);
                     var settingsCopy = new PatternDeformation(s.RotationAngle, true, s.FlipY);
                     var copy = MatrixFormatter<IEquatable<T>>.MirrorX(p.PatternForm);
                     patternList.Add((settingsCopy, new Pattern<T>(copy)));
@@ -71,8 +72,9 @@ namespace MarkovTest.TwoDimension.Rules
 
             patternList.Clear();
             if (RotationSettings.HasFlag(RotationSettingsFlags.FlipY))
-                foreach (var (s, p) in Patterns)
+                foreach (var pattern in Patterns)
                 {
+                    var (s, p) = (pattern.Key, pattern.Value);
                     var settingsCopy = new PatternDeformation(s.RotationAngle, s.FlipX, true);
                     var copy = MatrixFormatter<IEquatable<T>>.MirrorY(p.PatternForm);
                     patternList.Add((settingsCopy, new Pattern<T>(copy)));

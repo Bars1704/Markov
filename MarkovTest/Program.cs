@@ -4,6 +4,8 @@ using MarkovTest.TwoDimension.Rules;
 using MarkovTest.TwoDimension.Sequences;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
+using System.IO;
 
 namespace MarkovTest
 {

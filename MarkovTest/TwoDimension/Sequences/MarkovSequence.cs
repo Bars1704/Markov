@@ -1,6 +1,7 @@
 using MarkovTest.TwoDimension.Rules;
 using Newtonsoft.Json;
 using System;
+using System.Linq;
 
 namespace MarkovTest.TwoDimension.Sequences
 {
