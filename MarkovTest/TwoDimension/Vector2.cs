@@ -1,5 +1,7 @@
 // ReSharper disable FieldCanBeMadeReadOnly.Global
 
+using System;
+
 namespace MarkovTest.TwoDimension
 {
     /// <summary>
@@ -39,7 +41,7 @@ namespace MarkovTest.TwoDimension
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(X, Y);
+            return (X, Y).GetHashCode();
         }
 
         public static bool operator ==(Vector2Int left, Vector2Int right)

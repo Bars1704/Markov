@@ -3,6 +3,7 @@ using MarkovTest.TwoDimension.Patterns;
 using MarkovTest.TwoDimension.Sequences;
 using Newtonsoft.Json;
 using System;
+using System.Collections.Generic;
 
 namespace MarkovTest.TwoDimension.Rules
 {
