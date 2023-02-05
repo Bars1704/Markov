@@ -1,3 +1,5 @@
+using System;
+
 namespace MarkovTest.Misc
 {
     /// <summary>
