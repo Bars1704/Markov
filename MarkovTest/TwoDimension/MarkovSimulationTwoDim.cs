@@ -5,6 +5,7 @@ using MarkovTest.TwoDimension.Patterns;
 using MarkovTest.TwoDimension.Rules;
 using MarkovTest.TwoDimension.Sequences;
 using Newtonsoft.Json;
+using System;
 
 namespace MarkovTest.TwoDimension
 {

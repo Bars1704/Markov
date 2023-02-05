@@ -2,6 +2,7 @@ using System.Runtime.Serialization;
 using MarkovTest.TwoDimension.Patterns;
 using MarkovTest.TwoDimension.Sequences;
 using Newtonsoft.Json;
+using System;
 
 namespace MarkovTest.TwoDimension.Rules
 {

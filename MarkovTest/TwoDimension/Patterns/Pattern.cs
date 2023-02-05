@@ -1,4 +1,4 @@
-using System.Runtime.Serialization;
+using System;
 using MarkovTest.Converters;
 using Newtonsoft.Json;
 

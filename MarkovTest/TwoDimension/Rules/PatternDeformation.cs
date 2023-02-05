@@ -1,4 +1,5 @@
 using MarkovTest.TwoDimension.Patterns;
+using System;
 
 namespace MarkovTest.TwoDimension.Rules
 {

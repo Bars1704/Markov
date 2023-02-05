@@ -1,5 +1,6 @@
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
+using System;
 
 namespace MarkovTest.TwoDimension.Sequences
 {
