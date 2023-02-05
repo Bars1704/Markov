@@ -19,7 +19,8 @@ namespace MarkovTest.TwoDimension
         public event Action? OnPlayed;
 
         //TODO: Сделать пул пулов, подумать в принципе как убрать эту зависимость
-        [JsonIgnore] public readonly ObjectPool<List<(Vector2Int, PatternDeformation)>> CoordsPool = new();
+        [JsonIgnore] public readonly ObjectPool<List<(Vector2Int, PatternDeformation)>> CoordsPool =
+            new ObjectPool<List<(Vector2Int, PatternDeformation)>>();
 
         //TODO: Подумать в принципе как убрать эту зависимость
         [JsonIgnore] public RandomFabric RandomFabric;
