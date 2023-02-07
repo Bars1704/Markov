@@ -7,6 +7,7 @@ using MarkovTest.TwoDimension.Sequences;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace MarkovTest.TwoDimension
 {
@@ -42,7 +43,7 @@ namespace MarkovTest.TwoDimension
         /// <summary>
         /// Size of the simulation
         /// </summary>
-        public Vector2Int Size { get;  }
+        public Vector2Int Size { get; }
 
         /// <summary>
         /// Value of the current point inside simulation
@@ -57,7 +58,7 @@ namespace MarkovTest.TwoDimension
         /// <param name="coords">coords inside simulation</param>
         public T this[Vector2Int coords] => Simulation[coords.X, coords.Y];
 
-        public int? Seed { get;  }
+        public int? Seed { get; }
 
         /// <summary>
         /// </summary>
@@ -87,7 +88,11 @@ namespace MarkovTest.TwoDimension
             RandomFabric = seed.HasValue ? new RandomFabric(seed.Value) : new RandomFabric();
         }
 
-        public MarkovSimulationTwoDim() { }
+        public MarkovSimulationTwoDim()
+        {
+            InitRandomFabric(null);
+            DefaultState = new T[1, 1];
+        }
 
         /// <summary>
         /// Replaces values in simulation with values from stamp
@@ -128,6 +133,7 @@ namespace MarkovTest.TwoDimension
             Array.Copy(DefaultState, Simulation, DefaultState.Length);
             foreach (var playable in Playables)
             {
+                Thread.Sleep(100);
                 playable.Play(simulation);
                 OnPlayed?.Invoke();
             }
