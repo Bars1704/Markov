@@ -28,7 +28,7 @@ namespace MarkovTest.TwoDimension
         //TODO: Подумать в принципе как убрать эту зависимость
         [JsonIgnore] public RandomFabric RandomFabric;
 
-        [JsonProperty] public IList<ISequencePlayable<T>> Playables = new List<ISequencePlayable<T>>();
+        [JsonProperty] public List<ISequencePlayable<T>> Playables = new List<ISequencePlayable<T>>();
 
         /// <summary>
         /// Represents current simulation state
