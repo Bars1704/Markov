@@ -9,7 +9,7 @@ namespace MarkovTest.TwoDimension.Rules
 {
     public abstract class RuleBase<T> : ISequencePlayable<T> where T : IEquatable<T>
     {
-        [JsonProperty] public RotationSettingsFlags RotationSettings { get; }
+        [JsonProperty] public RotationSettingsFlags RotationSettings { get; set; }
 
         [JsonProperty] public T[,] Stamp { get; }
 

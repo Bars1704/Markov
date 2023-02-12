@@ -5,6 +5,7 @@ namespace MarkovTest.TwoDimension.Rules
     [Flags]
     public enum RotationSettingsFlags
     {
+        None = 0,
         Rotate = 1,
         FlipX = 2,
         FlipY = 4

@@ -7,7 +7,7 @@ namespace MarkovTest.TwoDimension.Sequences
     public class CycleSequence<T> : SequenceBase<T> where T : IEquatable<T>
     {
         [JsonProperty]
-        public int Cycles { get; }
+        public int Cycles { get; set; }
         [JsonIgnore]
         public int Counter { get; private set; }
 

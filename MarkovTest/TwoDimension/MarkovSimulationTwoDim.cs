@@ -33,12 +33,12 @@ namespace MarkovTest.TwoDimension
         /// <summary>
         /// Represents current simulation state
         /// </summary>
-        [JsonIgnore] private T[,] Simulation;
+        [JsonIgnore] public T[,] Simulation { get; private set; }
 
         /// <summary>
         /// Represents current simulation state
         /// </summary>
-        [JsonProperty] private readonly T[,] DefaultState;
+        [JsonProperty] public readonly T[,] DefaultState;
 
         /// <summary>
         /// Size of the simulation

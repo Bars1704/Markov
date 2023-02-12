@@ -59,7 +59,7 @@ namespace MarkovTest.Converters
             if (matrix.GroupBy(x => x.Count).Count() > 1)
                 throw new JsonException($"Invalid matrix form");
 
-            var mainType = objectType.MakeArrayType().GetGenericArguments()[0];
+            var mainType = objectType.GetElementType().GetGenericArguments()[0];
 
             var xSize = matrix.Count;
             var ySize = matrix.First().Count;
