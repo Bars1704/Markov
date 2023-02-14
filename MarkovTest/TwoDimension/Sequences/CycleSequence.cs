@@ -6,14 +6,16 @@ namespace MarkovTest.TwoDimension.Sequences
     [Serializable]
     public class CycleSequence<T> : SequenceBase<T> where T : IEquatable<T>
     {
-        [JsonProperty]
-        public int Cycles { get; set; }
-        [JsonIgnore]
-        public int Counter { get; private set; }
+        [JsonProperty] public int Cycles { get; set; }
+        [JsonIgnore] public int Counter { get; private set; }
 
         public CycleSequence(int cycles)
         {
             Cycles = cycles;
+        }
+
+        public CycleSequence()
+        {
         }
 
         public override bool CanPlay(MarkovSimulationTwoDim<T> simulation) => Counter < Cycles;

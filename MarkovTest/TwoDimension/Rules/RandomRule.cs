@@ -41,5 +41,9 @@ namespace MarkovTest.TwoDimension.Rules
             : base(pattern, stamp, rotationSettings)
         {
         }
+
+        public RandomRule() : base()
+        {
+        }
     }
 }

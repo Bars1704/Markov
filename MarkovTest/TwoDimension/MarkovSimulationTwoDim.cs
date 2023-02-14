@@ -12,7 +12,7 @@ using System.Threading;
 namespace MarkovTest.TwoDimension
 {
     [Serializable]
-    public class MarkovSimulationTwoDim<T> : ISequencePlayable<T> where T : IEquatable<T>
+    public class MarkovSimulationTwoDim<T> : ISequencePlayable<T>, IResizable where T : IEquatable<T>
     {
         /// <summary>
         /// Invokes, when simulation changed
@@ -33,17 +33,18 @@ namespace MarkovTest.TwoDimension
         /// <summary>
         /// Represents current simulation state
         /// </summary>
-        [JsonIgnore] public T[,] Simulation { get; private set; }
+        [JsonIgnore]
+        public T[,] Simulation { get; private set; }
 
         /// <summary>
         /// Represents current simulation state
         /// </summary>
-        [JsonProperty] public readonly T[,] DefaultState;
+        [JsonProperty] public T[,] DefaultState;
 
         /// <summary>
         /// Size of the simulation
         /// </summary>
-        public Vector2Int Size { get; }
+        public Vector2Int Size => new Vector2Int(DefaultState.GetLength(0), DefaultState.GetLength(1));
 
         /// <summary>
         /// Value of the current point inside simulation
@@ -73,7 +74,6 @@ namespace MarkovTest.TwoDimension
             Seed = seed;
             DefaultState = initialSimulationState;
             Simulation = new T[DefaultState.GetLength(0), DefaultState.GetLength(1)];
-            Size = new Vector2Int(initialSimulationState.GetLength(0), initialSimulationState.GetLength(1));
         }
 
         [OnDeserialized]
@@ -88,10 +88,16 @@ namespace MarkovTest.TwoDimension
             RandomFabric = seed.HasValue ? new RandomFabric(seed.Value) : new RandomFabric();
         }
 
+        public void Resize(Vector2Int newSize)
+        {
+            DefaultState = MatrixFormatter<T>.Resize(DefaultState, newSize.X, newSize.Y);
+            Simulation = new T[DefaultState.GetLength(0), DefaultState.GetLength(1)];
+        }
+
         public MarkovSimulationTwoDim()
         {
             InitRandomFabric(null);
-            DefaultState = new T[1, 1];
+            DefaultState = new T[0, 0];
         }
 
         /// <summary>

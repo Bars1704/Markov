@@ -9,16 +9,21 @@ namespace MarkovTest.TwoDimension.Patterns
     /// Represents 
     /// </summary>
     /// <typeparam name="T"></typeparam>
-    public class Pattern<T> where T : IEquatable<T>
+    public class Pattern<T> : IResizable where T : IEquatable<T>
     {
         [JsonConverter(typeof(PatternConverter))]
-        public IEquatable<T>[,] PatternForm { get; }
+        public IEquatable<T>[,] PatternForm { get; set; }
 
         public Pattern(IEquatable<T>[,] patternForm)
         {
             PatternForm = patternForm;
         }
-        
+
+        public Pattern()
+        {
+            PatternForm = new IEquatable<T>[0, 0];
+        }
+
         /// <summary>
         /// Check, if there pattern in given 
         /// </summary>
@@ -48,8 +53,17 @@ namespace MarkovTest.TwoDimension.Patterns
 
             return true;
         }
-        
-        
 
+
+        public void Resize(Vector2Int newSize)
+        {
+            PatternForm = MatrixFormatter<T>.Resize(PatternForm, newSize.X, newSize.Y);
+            for (var x = 0; x < PatternForm.GetLength(0); x++)
+            for (var y = 0; y < PatternForm.GetLength(1); y++)
+                if (PatternForm[x, y] is null)
+                    PatternForm[x, y] = default(T);
+        }
+
+        public Vector2Int Size => new Vector2Int(PatternForm.GetLength(0), PatternForm.GetLength(1));
     }
 }

@@ -22,6 +22,18 @@ namespace MarkovTest.TwoDimension.Patterns
                 (matrix[x, y], matrix[x, sizeY - y - 1]) = (matrix[x, sizeY - y - 1], matrix[x, y]);
         }
 
+        public static T[,] Resize<T>(T[,] matrix, int sizeX, int sizeY)
+        {
+            var res = new T[sizeX, sizeY];
+            var minX = Math.Min(sizeX, matrix.GetLength(0));
+            var minY = Math.Min(sizeY, matrix.GetLength(1));
+
+            for (int x = 0; x < minX; x++)
+            for (int y = 0; y < minY; y++)
+                res[x, y] = matrix[x, y];
+
+            return res;
+        }
 
         /// <summary>
         /// Mirrors the given matrix by Y axis without creating a copy of matrix

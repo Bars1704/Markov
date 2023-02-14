@@ -7,15 +7,17 @@ using System.Collections.Generic;
 
 namespace MarkovTest.TwoDimension.Rules
 {
-    public abstract class RuleBase<T> : ISequencePlayable<T> where T : IEquatable<T>
+    public abstract class RuleBase<T> : ISequencePlayable<T>, IResizable where T : IEquatable<T>
     {
         [JsonProperty] public RotationSettingsFlags RotationSettings { get; set; }
 
-        [JsonProperty] public T[,] Stamp { get; }
+        [JsonProperty] public T[,] Stamp { get; set; }
 
         [JsonProperty] public Pattern<T> MainPattern { get; private set; }
 
         [JsonIgnore] public Dictionary<PatternDeformation, Pattern<T>> Patterns { get; set; }
+
+        public Vector2Int Size => MainPattern.Size;
 
         private IEnumerable<(RotationAngle rotationType, Pattern<T> pattern)> RotatePatterns(Pattern<T> pattern)
         {
@@ -39,6 +41,9 @@ namespace MarkovTest.TwoDimension.Rules
 
         protected RuleBase()
         {
+            MainPattern = new Pattern<T>();
+            Stamp = new T[0, 0];
+            RotationSettings = RotationSettingsFlags.None;
         }
 
         [OnDeserialized]
@@ -93,5 +98,12 @@ namespace MarkovTest.TwoDimension.Rules
 
         public event Action? OnPlayed;
         public abstract void Play(MarkovSimulationTwoDim<T> simulation);
+
+        public void Resize(Vector2Int newSize)
+        {
+            Stamp = MatrixFormatter<T>.Resize(Stamp, newSize.X, newSize.Y);
+            MainPattern.Resize(newSize);
+            CachePatternDeformations();
+        }
     }
 }

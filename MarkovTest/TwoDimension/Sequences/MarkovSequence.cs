@@ -10,6 +10,7 @@ namespace MarkovTest.TwoDimension.Sequences
         private bool _onRuleApplied { get; set; }
         private bool _firstPlay { get; set; } = true;
 
+        public MarkovSequence(){}
         private void OnRuleApplied(Vector2Int vector2Int, PatternDeformation deformation)
         {
             _onRuleApplied = true;
