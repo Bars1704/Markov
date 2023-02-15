@@ -22,7 +22,7 @@ namespace MarkovTest.TwoDimension.Patterns
                 (matrix[x, y], matrix[x, sizeY - y - 1]) = (matrix[x, sizeY - y - 1], matrix[x, y]);
         }
 
-        public static T[,] Resize<T>(T[,] matrix, int sizeX, int sizeY)
+        public static T[,] Resize(T[,] matrix, int sizeX, int sizeY)
         {
             var res = new T[sizeX, sizeY];
             var minX = Math.Min(sizeX, matrix.GetLength(0));

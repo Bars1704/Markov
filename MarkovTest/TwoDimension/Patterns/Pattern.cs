@@ -57,7 +57,7 @@ namespace MarkovTest.TwoDimension.Patterns
 
         public void Resize(Vector2Int newSize)
         {
-            PatternForm = MatrixFormatter<T>.Resize(PatternForm, newSize.X, newSize.Y);
+            PatternForm = MatrixFormatter<IEquatable<T>>.Resize(PatternForm, newSize.X, newSize.Y);
             for (var x = 0; x < PatternForm.GetLength(0); x++)
             for (var y = 0; y < PatternForm.GetLength(1); y++)
                 if (PatternForm[x, y] is null)
