@@ -12,7 +12,7 @@ using System.Threading;
 namespace MarkovTest.TwoDimension
 {
     [Serializable]
-    public class MarkovSimulationTwoDim<T> : ISequencePlayable<T>, IResizable where T : IEquatable<T>
+    public class MarkovSimulationTwoDim<T> : IResizable where T : IEquatable<T>
     {
         /// <summary>
         /// Invokes, when simulation changed
@@ -59,8 +59,6 @@ namespace MarkovTest.TwoDimension
         /// <param name="coords">coords inside simulation</param>
         public T this[Vector2Int coords] => Simulation[coords.X, coords.Y];
 
-        public int? Seed { get; }
-
         /// <summary>
         /// </summary>
         /// <param name="initialSimulationState">State, that simulation will have on start</param>
@@ -68,10 +66,8 @@ namespace MarkovTest.TwoDimension
         /// Seed for pseudo-random inside simulation.
         /// You can set same seed to get same results every time, or set seed to null, to get random seed
         /// </param>
-        public MarkovSimulationTwoDim(T[,] initialSimulationState, int? seed = null)
+        public MarkovSimulationTwoDim(T[,] initialSimulationState)
         {
-            InitRandomFabric(seed);
-            Seed = seed;
             DefaultState = initialSimulationState;
             Simulation = new T[DefaultState.GetLength(0), DefaultState.GetLength(1)];
         }
@@ -79,13 +75,7 @@ namespace MarkovTest.TwoDimension
         [OnDeserialized]
         internal void OnDeserialized(StreamingContext context)
         {
-            InitRandomFabric(Seed);
             Simulation = new T[DefaultState.GetLength(0), DefaultState.GetLength(1)];
-        }
-
-        private void InitRandomFabric(int? seed)
-        {
-            RandomFabric = seed.HasValue ? new RandomFabric(seed.Value) : new RandomFabric();
         }
 
         public void Resize(Vector2Int newSize)
@@ -96,7 +86,6 @@ namespace MarkovTest.TwoDimension
 
         public MarkovSimulationTwoDim()
         {
-            InitRandomFabric(null);
             DefaultState = new T[0, 0];
         }
 
@@ -134,8 +123,10 @@ namespace MarkovTest.TwoDimension
         }
 
 
-        public void Play(MarkovSimulationTwoDim<T> simulation)
+        public void Play(MarkovSimulationTwoDim<T> simulation, int? seed = default)
         {
+            RandomFabric = seed.HasValue ? new RandomFabric(seed.Value) : new RandomFabric();
+
             Array.Copy(DefaultState, Simulation, DefaultState.Length);
             foreach (var playable in Playables)
             {
