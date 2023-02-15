@@ -11,16 +11,26 @@ namespace MarkovTest.TwoDimension.Sequences
 
         public event Action OnPlayed;
 
-        public virtual void Play(MarkovSimulationTwoDim<T> simulation, RandomFabric randomFabric)
+        public void Play(MarkovSimulationTwoDim<T> simulation, RandomFabric randomFabric)
         {
             Init();
+            PlayOneShot(simulation, randomFabric);
+            Reset();
+        }
+
+        protected virtual void PlayOneShot(MarkovSimulationTwoDim<T> simulation, RandomFabric randomFabric)
+        {
             while (CanPlay(simulation))
             {
                 OnPlay();
                 Playables.ForEach(x => x.Play(simulation, randomFabric));
-                OnPlayed?.Invoke();
+                OnPlayablePlayed();
             }
-            Reset();
+        }
+
+        protected void OnPlayablePlayed()
+        {
+            OnPlayed?.Invoke();
         }
 
         protected SequenceBase()
