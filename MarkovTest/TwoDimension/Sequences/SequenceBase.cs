@@ -1,6 +1,7 @@
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using MarkovTest.Misc;
 
 namespace MarkovTest.TwoDimension.Sequences
 {
@@ -10,13 +11,13 @@ namespace MarkovTest.TwoDimension.Sequences
 
         public event Action OnPlayed;
 
-        public virtual void Play(MarkovSimulationTwoDim<T> simulation)
+        public virtual void Play(MarkovSimulationTwoDim<T> simulation, RandomFabric randomFabric)
         {
             Init();
             while (CanPlay(simulation))
             {
                 OnPlay();
-                Playables.ForEach(x => x.Play(simulation));
+                Playables.ForEach(x => x.Play(simulation, randomFabric));
                 OnPlayed?.Invoke();
             }
             Reset();

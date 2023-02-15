@@ -24,10 +24,7 @@ namespace MarkovTest.TwoDimension
         //TODO: Сделать пул пулов, подумать в принципе как убрать эту зависимость
         [JsonIgnore] public readonly ObjectPool<List<(Vector2Int, PatternDeformation)>> CoordsPool =
             new ObjectPool<List<(Vector2Int, PatternDeformation)>>();
-
-        //TODO: Подумать в принципе как убрать эту зависимость
-        [JsonIgnore] public RandomFabric RandomFabric;
-
+        
         [JsonProperty] public List<ISequencePlayable<T>> Playables = new List<ISequencePlayable<T>>();
 
         /// <summary>
@@ -125,13 +122,13 @@ namespace MarkovTest.TwoDimension
 
         public void Play(MarkovSimulationTwoDim<T> simulation, int? seed = default)
         {
-            RandomFabric = seed.HasValue ? new RandomFabric(seed.Value) : new RandomFabric();
+            var RandomFabric = seed.HasValue ? new RandomFabric(seed.Value) : new RandomFabric();
 
             Array.Copy(DefaultState, Simulation, DefaultState.Length);
             foreach (var playable in Playables)
             {
                 Thread.Sleep(100);
-                playable.Play(simulation);
+                playable.Play(simulation,RandomFabric);
                 OnPlayed?.Invoke();
             }
         }

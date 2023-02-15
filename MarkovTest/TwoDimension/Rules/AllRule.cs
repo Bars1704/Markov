@@ -1,13 +1,14 @@
 using MarkovTest.TwoDimension.Patterns;
 using System;
 using System.Linq;
+using MarkovTest.Misc;
 
 namespace MarkovTest.TwoDimension.Rules
 {
     [Serializable]
     public class AllRule<T> : RuleBase<T> where T : IEquatable<T>
     {
-        public override void Play(MarkovSimulationTwoDim<T> simulation)
+        public override void Play(MarkovSimulationTwoDim<T> simulation, RandomFabric randomFabric)
         {
             var coords =
                 Patterns.SelectMany(x =>
@@ -32,6 +33,8 @@ namespace MarkovTest.TwoDimension.Rules
         {
         }
 
-        public AllRule(): base(){}
+        public AllRule() : base()
+        {
+        }
     }
 }

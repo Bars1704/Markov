@@ -4,6 +4,7 @@ using MarkovTest.TwoDimension.Sequences;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using MarkovTest.Misc;
 
 namespace MarkovTest.TwoDimension.Rules
 {
@@ -97,7 +98,7 @@ namespace MarkovTest.TwoDimension.Rules
         public event Action<Vector2Int, PatternDeformation> OnRuleApplied;
 
         public event Action? OnPlayed;
-        public abstract void Play(MarkovSimulationTwoDim<T> simulation);
+        public abstract void Play(MarkovSimulationTwoDim<T> simulation, RandomFabric randomFabric);
 
         public void Resize(Vector2Int newSize)
         {

@@ -1,12 +1,13 @@
 using MarkovTest.TwoDimension.Patterns;
 using System;
 using System.Linq;
+using MarkovTest.Misc;
 
 namespace MarkovTest.TwoDimension.Rules
 {
     public class RandomRule<T> : RuleBase<T> where T : IEquatable<T>
     {
-        public override void Play(MarkovSimulationTwoDim<T> simulation)
+        public override void Play(MarkovSimulationTwoDim<T> simulation, RandomFabric randomFabric)
         {
             var coords = Patterns.SelectMany(x =>
                 simulation.GetPatternCoords(x.Value).Select(y => (coord: y, RotationSettings: x.Key)));
@@ -20,7 +21,7 @@ namespace MarkovTest.TwoDimension.Rules
             if (!coordsList.Any())
                 return;
 
-            var currentCoordIndex = simulation.RandomFabric.Next.Next(coordsList.Count);
+            var currentCoordIndex = randomFabric.Next.Next(coordsList.Count);
             var currentCoord = coordsList[currentCoordIndex];
 
             ApplyRuleEvent(currentCoord.Item1, currentCoord.Item2);
