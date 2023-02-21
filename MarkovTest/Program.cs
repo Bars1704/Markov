@@ -39,12 +39,12 @@ namespace MarkovTest
             };
             var stamp = SimulationFabric.CreateMatrixOfType<byte>(2, 2, 2);
             var ruleTest =
-                new AllRule<byte>(new Pattern<byte>(patternMatrix), stamp,
-                    RotationSettingsFlags.FlipY | RotationSettingsFlags.FlipX);
-            foreach (var rule in ruleTest.Patterns)
+                new AllRule<byte>(
+                    new Pattern<byte>(patternMatrix, RotationSettingsFlags.FlipY | RotationSettingsFlags.FlipX), stamp);
+            foreach (var rule in ruleTest.MainPattern.Patterns)
             {
                 Console.WriteLine(rule.Key);
-                PrintMatrix(rule.Value.PatternForm);
+                PrintMatrix(rule.Value);
                 Console.WriteLine();
             }
         }

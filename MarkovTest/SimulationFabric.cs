@@ -27,7 +27,7 @@ namespace MarkovTest
                 { b, b, b, b }
             };
 
-            sequence.Playables.Add(new RandomRule<byte>(new Pattern<byte>(pattern), stamp, default));
+            sequence.Playables.Add(new RandomRule<byte>(new Pattern<byte>(pattern), stamp));
 
             b++;
             var stamp1 = CreateMatrixOfType<byte>(3, 3, 3);
@@ -37,7 +37,7 @@ namespace MarkovTest
                 { b, b, b },
                 { b, b, b }
             };
-            sequence.Playables.Add(new RandomRule<byte>(new Pattern<byte>(pattern1), stamp1, default));
+            sequence.Playables.Add(new RandomRule<byte>(new Pattern<byte>(pattern1), stamp1));
 
             b++;
             var stamp2 = CreateMatrixOfType<byte>(2, 2, 4);
@@ -46,12 +46,12 @@ namespace MarkovTest
                 { b, b },
                 { b, b }
             };
-            sequence.Playables.Add(new RandomRule<byte>(new Pattern<byte>(pattern2), stamp2, default));
+            sequence.Playables.Add(new RandomRule<byte>(new Pattern<byte>(pattern2), stamp2));
 
             b++;
             var stamp3 = SimulationFabric.CreateMatrixOfType<byte>(1, 1, 5);
             var pattern3 = new IEquatable<byte>[,] { { b } };
-            sequence.Playables.Add(new RandomRule<byte>(new Pattern<byte>(pattern3), stamp3, default));
+            sequence.Playables.Add(new RandomRule<byte>(new Pattern<byte>(pattern3), stamp3));
             return simulation;
         }
 
@@ -68,30 +68,30 @@ namespace MarkovTest
             var stamp = new byte[,] { { (byte)2, (byte)3, (byte)2 } };
             var pattern = new IEquatable<byte>[,]
                 { { (byte)2, (byte)1, (byte)1 } };
-            sequence.Playables.Add(new RandomRule<byte>(new Pattern<byte>(pattern), stamp,
-                RotationSettingsFlagsExtensions.All()));
+            sequence.Playables.Add(
+                new RandomRule<byte>(new Pattern<byte>(pattern, RotationSettingsFlagsExtensions.All()), stamp));
 
             var sequence1 = new MarkovSequence<byte>();
             var stamp1 = new byte[,] { { (byte)2 } };
             var pattern1 = new IEquatable<byte>[,] { { (byte)3 } };
-            sequence1.Playables.Add(new AllRule<byte>(new Pattern<byte>(pattern1), stamp1, default));
+            sequence1.Playables.Add(new AllRule<byte>(new Pattern<byte>(pattern1), stamp1));
 
             var sequence2 = new CycleSequence<byte>(1);
             var stamp2 = new byte[,] { { (byte)4 } };
             var pattern2 = new IEquatable<byte>[,] { { (byte)1 } };
-            sequence2.Playables.Add(new RandomRule<byte>(new Pattern<byte>(pattern2), stamp2, default));
+            sequence2.Playables.Add(new RandomRule<byte>(new Pattern<byte>(pattern2), stamp2));
 
             var sequence3 = new MarkovSequence<byte>();
             var stamp3 = new byte[,] { { (byte)4, (byte)4, } };
             var pattern3 = new IEquatable<byte>[,] { { (byte)4, (byte)1 } };
-            sequence3.Playables.Add(new RandomRule<byte>(new Pattern<byte>(pattern3), stamp3,
-                RotationSettingsFlagsExtensions.All()));
+            sequence3.Playables.Add(
+                new RandomRule<byte>(new Pattern<byte>(pattern3, RotationSettingsFlagsExtensions.All()), stamp3));
 
             var sequence4 = new CycleSequence<byte>(1);
             var stamp4 = new byte[,] { { (byte)4, (byte)4, (byte)4, } };
             var pattern4 = new IEquatable<byte>[,] { { (byte)4, (byte)2, (byte)1 } };
-            sequence4.Playables.Add(new RandomRule<byte>(new Pattern<byte>(pattern4), stamp4,
-                RotationSettingsFlagsExtensions.All()));
+            sequence4.Playables.Add(
+                new RandomRule<byte>(new Pattern<byte>(pattern4, RotationSettingsFlagsExtensions.All()), stamp4));
 
             var sequence5 = new MarkovSequence<byte>();
             sequence5.Playables.Add(sequence3);
@@ -100,7 +100,7 @@ namespace MarkovTest
             var sequence6 = new MarkovSequence<byte>();
             var stamp6 = new byte[,] { { (byte)1 } };
             var pattern6 = new IEquatable<byte>[,] { { (byte)4 } };
-            sequence6.Playables.Add(new AllRule<byte>(new Pattern<byte>(pattern6), stamp6, default));
+            sequence6.Playables.Add(new AllRule<byte>(new Pattern<byte>(pattern6), stamp6));
 
             simulation.Playables.Add(sequence);
             simulation.Playables.Add(sequence1);
@@ -141,7 +141,7 @@ namespace MarkovTest
                 { (byte)0, (byte)1 },
             };
 
-            var rule = new RandomRule<byte>(new Pattern<byte>(pattern), stamp, RotationSettingsFlags.Rotate);
+            var rule = new RandomRule<byte>(new Pattern<byte>(pattern, RotationSettingsFlags.Rotate), stamp);
 
             sequence.Playables.Add(rule);
             return sequence;
