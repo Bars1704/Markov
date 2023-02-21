@@ -1,5 +1,7 @@
 using System;
+using System.Runtime.Serialization;
 using MarkovTest.Converters;
+using MarkovTest.TwoDimension.Rules;
 using Newtonsoft.Json;
 
 namespace MarkovTest.TwoDimension.Patterns
@@ -14,15 +16,31 @@ namespace MarkovTest.TwoDimension.Patterns
         [JsonConverter(typeof(PatternConverter))]
         public IEquatable<T>[,] PatternForm { get; set; }
 
-        public Pattern(IEquatable<T>[,] patternForm)
+        [JsonProperty] public RotationSettingsFlags RotationSettings { get; set; }
+
+        [JsonIgnore] public Dictionary<PatternDeformation, IEquatable<T>[,]> Patterns { get; set; }
+
+        public Pattern(IEquatable<T>[,] patternForm,
+            RotationSettingsFlags rotationSettings = RotationSettingsFlags.None)
         {
+            RotationSettings = rotationSettings;
             PatternForm = patternForm;
+
+            CachePatternDeformations();
         }
 
         public Pattern()
         {
             PatternForm = new IEquatable<T>[0, 0];
+            RotationSettings = RotationSettingsFlags.None;
         }
+
+        [OnDeserialized]
+        internal void OnDeserialized(StreamingContext context)
+        {
+            CachePatternDeformations();
+        }
+
 
         /// <summary>
         /// Check, if there pattern in given 
@@ -62,8 +80,84 @@ namespace MarkovTest.TwoDimension.Patterns
             for (var y = 0; y < PatternForm.GetLength(1); y++)
                 if (PatternForm[x, y] is null)
                     PatternForm[x, y] = default(T);
+
+            CachePatternDeformations();
         }
 
         public Vector2Int Size => new Vector2Int(PatternForm.GetLength(0), PatternForm.GetLength(1));
+
+        private IEnumerable<(RotationAngle rotationType, IEquatable<T>[,]pattern)> RotatePatterns(
+            IEquatable<T>[,] pattern)
+        {
+            (RotationAngle rType, IEquatable<T>[,]) Rotate(RotationAngle rType) =>
+                (rType, MatrixFormatter<IEquatable<T>>.Rotate(pattern, rType));
+
+            yield return Rotate(RotationAngle.Degrees0);
+            yield return Rotate(RotationAngle.Degrees90);
+            yield return Rotate(RotationAngle.Degrees180);
+            yield return Rotate(RotationAngle.Degrees270);
+        }
+
+        public IEnumerable<(Vector2Int coord, PatternDeformation RotationSettings)> GetAllCoords(MarkovSimulationTwoDim<T> simulation)
+        {
+            return Patterns.SelectMany(x =>
+                GetPatternCoords(simulation)
+                    .Select(y => (coord: y, RotationSettings: x.Key)));
+        }
+
+
+        /// <summary>
+        /// Returns coordinates, that matches to pattern
+        /// </summary>
+        /// <param name="pattern">Pattens, that will be checked</param>
+        /// <returns> Coordinates, that matches to pattern</returns>
+        public IEnumerable<Vector2Int> GetPatternCoords(MarkovSimulationTwoDim<T> simulation)
+        {
+            for (var x = 0; x < simulation.Simulation.GetLength(0); x++)
+            {
+                for (var y = 0; y < simulation.Simulation.GetLength(1); y++)
+                {
+                    var coord = new Vector2Int(x, y);
+                    if (Compare(simulation, coord))
+                        yield return coord;
+                }
+            }
+        }
+
+        private void CachePatternDeformations()
+        {
+            Patterns = new Dictionary<PatternDeformation, IEquatable<T>[,]>();
+
+            if (RotationSettings.HasFlag(RotationSettingsFlags.Rotate))
+                foreach (var rotatePattern in RotatePatterns(PatternForm))
+                    Patterns.Add(new PatternDeformation(rotatePattern.rotationType, false, false),
+                        rotatePattern.pattern);
+            else
+                Patterns.Add(new PatternDeformation(RotationAngle.Degrees0, false, false), PatternForm);
+
+            var patternList = new List<(PatternDeformation, IEquatable<T>[,])>(Patterns.Count);
+            if (RotationSettings.HasFlag(RotationSettingsFlags.FlipX))
+                foreach (var pattern in Patterns)
+                {
+                    var (s, p) = (pattern.Key, pattern.Value);
+                    var settingsCopy = new PatternDeformation(s.RotationAngle, true, s.FlipY);
+                    var copy = MatrixFormatter<IEquatable<T>>.MirrorX(PatternForm);
+                    patternList.Add((settingsCopy, copy));
+                }
+
+            patternList.ForEach(x => Patterns.Add(x.Item1, x.Item2));
+
+            patternList.Clear();
+            if (RotationSettings.HasFlag(RotationSettingsFlags.FlipY))
+                foreach (var pattern in Patterns)
+                {
+                    var (s, p) = (pattern.Key, pattern.Value);
+                    var settingsCopy = new PatternDeformation(s.RotationAngle, s.FlipX, true);
+                    var copy = MatrixFormatter<IEquatable<T>>.MirrorY(PatternForm);
+                    patternList.Add((settingsCopy, copy));
+                }
+
+            patternList.ForEach(x => Patterns.Add(x.Item1, x.Item2));
+        }
     }
 }

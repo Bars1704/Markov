@@ -5,9 +5,7 @@ using MarkovTest.TwoDimension.Patterns;
 using MarkovTest.TwoDimension.Rules;
 using MarkovTest.TwoDimension.Sequences;
 using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Threading;
+
 
 namespace MarkovTest.TwoDimension
 {
@@ -24,7 +22,7 @@ namespace MarkovTest.TwoDimension
         //TODO: Сделать пул пулов, подумать в принципе как убрать эту зависимость
         [JsonIgnore] public readonly ObjectPool<List<(Vector2Int, PatternDeformation)>> CoordsPool =
             new ObjectPool<List<(Vector2Int, PatternDeformation)>>();
-        
+
         [JsonProperty] public List<ISequencePlayable<T>> Playables = new List<ISequencePlayable<T>>();
 
         /// <summary>
@@ -101,24 +99,6 @@ namespace MarkovTest.TwoDimension
             OnSimulationChanged.Invoke(Simulation);
         }
 
-        /// <summary>
-        /// Returns coordinates, that matches to pattern
-        /// </summary>
-        /// <param name="pattern">Pattens, that will be checked</param>
-        /// <returns> Coordinates, that matches to pattern</returns>
-        public IEnumerable<Vector2Int> GetPatternCoords(Pattern<T> pattern)
-        {
-            for (var x = 0; x < Simulation.GetLength(0); x++)
-            {
-                for (var y = 0; y < Simulation.GetLength(1); y++)
-                {
-                    var coord = new Vector2Int(x, y);
-                    if (pattern.Compare(this, coord))
-                        yield return coord;
-                }
-            }
-        }
-
 
         public void Play(MarkovSimulationTwoDim<T> simulation, int? seed = default)
         {
@@ -128,7 +108,7 @@ namespace MarkovTest.TwoDimension
             foreach (var playable in Playables)
             {
                 Thread.Sleep(100);
-                playable.Play(simulation,RandomFabric);
+                playable.Play(simulation, RandomFabric);
                 OnPlayed?.Invoke();
             }
         }

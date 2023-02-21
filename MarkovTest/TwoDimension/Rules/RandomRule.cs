@@ -9,8 +9,7 @@ namespace MarkovTest.TwoDimension.Rules
     {
         public override void Play(MarkovSimulationTwoDim<T> simulation, RandomFabric randomFabric)
         {
-            var coords = Patterns.SelectMany(x =>
-                simulation.GetPatternCoords(x.Value).Select(y => (coord: y, RotationSettings: x.Key)));
+            var coords = MainPattern.GetAllCoords(simulation);
 
             var poolElem = simulation.CoordsPool.Get();
             var coordsList = poolElem.Value;
@@ -38,8 +37,8 @@ namespace MarkovTest.TwoDimension.Rules
             poolElem.Return();
         }
 
-        public RandomRule(Pattern<T> pattern, T[,] stamp, RotationSettingsFlags rotationSettings)
-            : base(pattern, stamp, rotationSettings)
+        public RandomRule(Pattern<T> pattern, T[,] stamp)
+            : base(pattern, stamp)
         {
         }
 

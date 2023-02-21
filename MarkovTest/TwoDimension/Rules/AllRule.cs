@@ -10,10 +10,7 @@ namespace MarkovTest.TwoDimension.Rules
     {
         public override void Play(MarkovSimulationTwoDim<T> simulation, RandomFabric randomFabric)
         {
-            var coords =
-                Patterns.SelectMany(x =>
-                    simulation.GetPatternCoords(x.Value)
-                        .Select(y => (coord: y, RotationSettings: x.Key)));
+            var coords = MainPattern.GetAllCoords(simulation);
 
             foreach (var coord in coords)
             {
@@ -28,8 +25,8 @@ namespace MarkovTest.TwoDimension.Rules
         }
 
 
-        public AllRule(Pattern<T> pattern, T[,] stamp, RotationSettingsFlags rotationSettings)
-            : base(pattern, stamp, rotationSettings)
+        public AllRule(Pattern<T> pattern, T[,] stamp)
+            : base(pattern, stamp)
         {
         }
 
