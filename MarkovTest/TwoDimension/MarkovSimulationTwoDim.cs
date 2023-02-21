@@ -16,10 +16,7 @@ namespace MarkovTest.TwoDimension
         /// Invokes, when simulation changed
         /// </summary>
         public event Action<T[,]> OnSimulationChanged = _ => { };
-
-        public event Action? OnPlayed;
-
-        //TODO: Сделать пул пулов, подумать в принципе как убрать эту зависимость
+        
         [JsonIgnore] public readonly ObjectPool<List<(Vector2Int, PatternDeformation)>> CoordsPool =
             new ObjectPool<List<(Vector2Int, PatternDeformation)>>();
 
@@ -109,7 +106,6 @@ namespace MarkovTest.TwoDimension
             {
                 Thread.Sleep(100);
                 playable.Play(simulation, RandomFabric);
-                OnPlayed?.Invoke();
             }
         }
     }
