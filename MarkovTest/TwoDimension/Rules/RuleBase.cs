@@ -7,7 +7,7 @@ using MarkovTest.ThreeDimension;
 
 namespace MarkovTest.TwoDimension.Rules
 {
-    public abstract class RuleBase<T> : ISequencePlayable<T>, IResizable2D where T : IEquatable<T>
+    public abstract class RuleBase<T> : ISequencePlayable<T>, IResizable where T : IEquatable<T>
     {
         [JsonProperty] public T[,] Stamp { get; set; }
 
