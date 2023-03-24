@@ -12,7 +12,7 @@ using Newtonsoft.Json;
 namespace MarkovTest.TwoDimension
 {
     [Serializable]
-    public class MarkovSimulation<T> : IResizable2D, IMarkovSimulation where T : IEquatable<T>
+    public class MarkovSimulation<T> : IResizable, IMarkovSimulation where T : IEquatable<T>
     {
         /// <summary>
         /// Invokes, when simulation changed
