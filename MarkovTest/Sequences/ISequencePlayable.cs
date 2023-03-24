@@ -1,8 +1,9 @@
+using System;
 using MarkovTest.Misc;
 
 namespace MarkovTest.Sequences
 {
-    public interface ISequencePlayable<TSimElement, TSimType>
+    public interface ISequencePlayable<TSimElement, in TSimType>
         where TSimElement : IEquatable<TSimElement>
         where TSimType : IMarkovSimulation<TSimElement>
     {

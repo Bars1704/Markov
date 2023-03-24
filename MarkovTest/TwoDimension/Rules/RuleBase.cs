@@ -1,3 +1,4 @@
+using System;
 using MarkovTest.TwoDimension.Patterns;
 using Newtonsoft.Json;
 using MarkovTest.Misc;
@@ -32,7 +33,7 @@ namespace MarkovTest.TwoDimension.Rules
 
         public event Action<Vector2Int, PatternDeformation2D> OnRuleApplied;
 
-        public event Action? OnPlayed;
+        public event Action OnPlayed;
         public abstract void Play(MarkovSimulation<T> simulation, RandomFabric randomFabric);
 
         public void Resize(Vector2Int newSize)

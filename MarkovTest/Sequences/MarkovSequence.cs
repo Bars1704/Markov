@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using MarkovTest.TwoDimension;
 using MarkovTest.TwoDimension.Rules;
 

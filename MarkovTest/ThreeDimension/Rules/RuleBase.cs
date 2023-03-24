@@ -33,7 +33,7 @@ namespace MarkovTest.ThreeDimension.Rules
 
         public event Action<Vector3Int, PatternDeformation3D> OnRuleApplied;
 
-        public event Action? OnPlayed;
+        public event Action OnPlayed;
         public abstract void Play(MarkovSimulation<T> simulation, RandomFabric randomFabric);
 
         public void Resize(Vector3Int newSize)

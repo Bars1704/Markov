@@ -1,3 +1,4 @@
+using System;
 using MarkovTest.Sequences;
 using MarkovTest.TwoDimension;
 using MarkovTest.TwoDimension.Patterns;

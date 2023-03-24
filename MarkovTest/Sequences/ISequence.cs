@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace MarkovTest.Sequences
 {
     public interface ISequence<TSimElement, TSimType> : ISequencePlayable<TSimElement, TSimType>
