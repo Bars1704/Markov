@@ -1,7 +1,8 @@
-using MarkovTest.TwoDimension.Patterns;
 using MarkovTest.Misc;
+using MarkovTest.ThreeDimension.Patterns;
 
-namespace MarkovTest.TwoDimension.Rules
+
+namespace MarkovTest.ThreeDimension.Rules
 {
     [Serializable]
     public class AllRule<T> : RuleBase<T> where T : IEquatable<T>
@@ -13,7 +14,10 @@ namespace MarkovTest.TwoDimension.Rules
             foreach (var coord in coords)
             {
                 ApplyRuleEvent(coord.coord, coord.RotationSettings);
-                var stamp = MatrixFormatter<T>.Rotate(Stamp, coord.RotationSettings.RotationAngle);
+                var stamp = MatrixFormatter<T>.RotateX(Stamp, coord.RotationSettings.RotationAngleX);
+                stamp = MatrixFormatter<T>.RotateY(stamp, coord.RotationSettings.RotationAngleY);
+                stamp = MatrixFormatter<T>.RotateZ(stamp, coord.RotationSettings.RotationAngleZ);
+                
                 if (coord.RotationSettings.FlipX)
                     MatrixFormatter<T>.MirrorNonAllocX(stamp);
                 if (coord.RotationSettings.FlipY)
@@ -23,7 +27,7 @@ namespace MarkovTest.TwoDimension.Rules
         }
 
 
-        public AllRule(Pattern<T> pattern, T[,] stamp)
+        public AllRule(Pattern<T> pattern, T[,,] stamp)
             : base(pattern, stamp)
         {
         }

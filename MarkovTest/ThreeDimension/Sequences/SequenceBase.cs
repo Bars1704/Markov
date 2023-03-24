@@ -1,10 +1,7 @@
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using MarkovTest.Misc;
-using MarkovTest.ThreeDimension.Sequences;
+using Newtonsoft.Json;
 
-namespace MarkovTest.TwoDimension.Sequences
+namespace MarkovTest.ThreeDimension.Sequences
 {
     public abstract class SequenceBase<T> : ISequence<T> where T : IEquatable<T>
     {

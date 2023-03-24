@@ -24,31 +24,9 @@ namespace MarkovTest
             File.WriteAllText("C:\\Users\\Maks\\Desktop\\Sim.json", serializeObject);
             simulation = SimulationSerializer.DeserializeSim<byte>(serializeObject);
             simulation.OnSimulationChanged += x => PrintMatrix(x);
-            simulation.Play(simulation);
+            simulation.Play();
         }
-
-
-        private static void PatternRotationTest()
-        {
-            var patternMatrix = new IEquatable<byte>[,]
-            {
-                { (byte)1, (byte)2, (byte)3, (byte)3 },
-                { (byte)1, (byte)2, (byte)3, (byte)3 },
-                { (byte)4, (byte)5, (byte)6, (byte)6 },
-                { (byte)4, (byte)5, (byte)6, (byte)6 },
-            };
-            var stamp = SimulationFabric.CreateMatrixOfType<byte>(2, 2, 2);
-            var ruleTest =
-                new AllRule<byte>(new Pattern<byte>(patternMatrix), stamp,
-                    RotationSettingsFlags.FlipY | RotationSettingsFlags.FlipX);
-            foreach (var rule in ruleTest.Patterns)
-            {
-                Console.WriteLine(rule.Key);
-                PrintMatrix(rule.Value.PatternForm);
-                Console.WriteLine();
-            }
-        }
-
+        
         private static void PrintMatrix(Array arr, bool readKey = false)
         {
             //Console.ReadKey();

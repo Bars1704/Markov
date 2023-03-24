@@ -1,5 +1,4 @@
-
-namespace MarkovTest.TwoDimension.Sequences
+namespace MarkovTest.ThreeDimension.Sequences
 {
     public interface ISequence<T> : ISequencePlayable<T> where T : IEquatable<T>
     {

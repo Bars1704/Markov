@@ -1,12 +1,12 @@
 using System;
 
-namespace MarkovTest.TwoDimension.Patterns
+namespace MarkovTest
 {
     /// <summary>
     /// Contains methods to deform matrix, like rotating or mirroring
     /// </summary>
     /// <typeparam name="T">Type of matrix elements</typeparam>
-    public static class MatrixFormatter<T>
+    public static partial class MatrixFormatter<T>
     {
         /// <summary>
         /// Mirrors the given matrix by X axis without creating a copy of matrix

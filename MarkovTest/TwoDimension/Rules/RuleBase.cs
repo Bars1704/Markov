@@ -2,10 +2,11 @@ using MarkovTest.TwoDimension.Patterns;
 using MarkovTest.TwoDimension.Sequences;
 using Newtonsoft.Json;
 using MarkovTest.Misc;
+using MarkovTest.ThreeDimension;
 
 namespace MarkovTest.TwoDimension.Rules
 {
-    public abstract class RuleBase<T> : ISequencePlayable<T>, IResizable where T : IEquatable<T>
+    public abstract class RuleBase<T> : ISequencePlayable<T>, IResizable2D where T : IEquatable<T>
     {
         [JsonProperty] public T[,] Stamp { get; set; }
 
@@ -24,16 +25,16 @@ namespace MarkovTest.TwoDimension.Rules
             Stamp = new T[0, 0];
         }
 
-        protected void ApplyRuleEvent(Vector2Int coord, PatternDeformation rotationSettings)
+        protected void ApplyRuleEvent(Vector2Int coord, PatternDeformation2D rotationSettings)
         {
             OnRuleApplied?.Invoke(coord, rotationSettings);
             OnPlayed?.Invoke();
         }
 
-        public event Action<Vector2Int, PatternDeformation> OnRuleApplied;
+        public event Action<Vector2Int, PatternDeformation2D> OnRuleApplied;
 
         public event Action? OnPlayed;
-        public abstract void Play(MarkovSimulationTwoDim<T> simulation, RandomFabric randomFabric);
+        public abstract void Play(MarkovSimulation<T> simulation, RandomFabric randomFabric);
 
         public void Resize(Vector2Int newSize)
         {

@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace MarkovTest.TwoDimension.Patterns
+namespace MarkovTest
 {
     /// <summary>
     /// Represents rotation angle
@@ -15,3 +15,5 @@ namespace MarkovTest.TwoDimension.Patterns
         Degrees270 = 270
     }
 }
+
+

@@ -1,7 +1,7 @@
+using MarkovTest.TwoDimension;
 using Newtonsoft.Json;
-using System;
 
-namespace MarkovTest.TwoDimension.Sequences
+namespace MarkovTest.ThreeDimension.Sequences
 {
     [Serializable]
     public class CycleSequence<T> : SequenceBase<T> where T : IEquatable<T>

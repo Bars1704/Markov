@@ -13,14 +13,14 @@ namespace MarkovTest.Serialization
             _serializerSettings = new JsonSerializerSettings { TypeNameHandling = TypeNameHandling.All };
         }
 
-        public static string SerializeSim<T>(MarkovSimulationTwoDim<T> simulation) where T : IEquatable<T>
+        public static string SerializeSim<T>(MarkovSimulation<T> simulation) where T : IEquatable<T>
         {
             return JsonConvert.SerializeObject(simulation, Formatting.Indented, _serializerSettings);
         }
 
-        public static MarkovSimulationTwoDim<T> DeserializeSim<T>(string json) where T : IEquatable<T>
+        public static MarkovSimulation<T> DeserializeSim<T>(string json) where T : IEquatable<T>
         {
-            return JsonConvert.DeserializeObject<MarkovSimulationTwoDim<T>>(json, _serializerSettings);
+            return JsonConvert.DeserializeObject<MarkovSimulation<T>>(json, _serializerSettings);
         }
     }
 }

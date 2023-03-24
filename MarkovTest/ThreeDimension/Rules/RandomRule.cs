@@ -1,7 +1,8 @@
-using MarkovTest.TwoDimension.Patterns;
 using MarkovTest.Misc;
+using MarkovTest.ThreeDimension.Patterns;
 
-namespace MarkovTest.TwoDimension.Rules
+
+namespace MarkovTest.ThreeDimension.Rules
 {
     public class RandomRule<T> : RuleBase<T> where T : IEquatable<T>
     {
@@ -23,11 +24,15 @@ namespace MarkovTest.TwoDimension.Rules
 
             ApplyRuleEvent(currentCoord.Item1, currentCoord.Item2);
 
-            var stamp = MatrixFormatter<T>.Rotate(Stamp, currentCoord.Item2.RotationAngle);
+            var coord = currentCoord.Item2;
 
-            if (currentCoord.Item2.FlipX)
+            var stamp = MatrixFormatter<T>.RotateX(Stamp, coord.RotationAngleX);
+            stamp = MatrixFormatter<T>.RotateY(stamp, coord.RotationAngleY);
+            stamp = MatrixFormatter<T>.RotateZ(stamp, coord.RotationAngleZ);
+
+            if (coord.FlipX)
                 MatrixFormatter<T>.MirrorNonAllocX(stamp);
-            if (currentCoord.Item2.FlipY)
+            if (coord.FlipY)
                 MatrixFormatter<T>.MirrorNonAllocY(stamp);
 
             simulation.Replace(currentCoord.Item1, stamp);
@@ -35,7 +40,7 @@ namespace MarkovTest.TwoDimension.Rules
             poolElem.Return();
         }
 
-        public RandomRule(Pattern<T> pattern, T[,] stamp)
+        public RandomRule(Pattern<T> pattern, T[,,] stamp)
             : base(pattern, stamp)
         {
         }

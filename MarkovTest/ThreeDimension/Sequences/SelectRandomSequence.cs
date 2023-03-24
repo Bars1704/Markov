@@ -1,9 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using MarkovTest.Misc;
+using MarkovTest.TwoDimension;
 
-namespace MarkovTest.TwoDimension.Sequences
+namespace MarkovTest.ThreeDimension.Sequences
 {
     public class SelectRandomSequence<T> : SequenceBase<T> where T : IEquatable<T>
     {

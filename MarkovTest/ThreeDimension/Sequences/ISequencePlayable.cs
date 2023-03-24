@@ -1,6 +1,6 @@
 using MarkovTest.Misc;
 
-namespace MarkovTest.TwoDimension.Sequences
+namespace MarkovTest.ThreeDimension.Sequences
 {
     public interface ISequencePlayable<T> where T : IEquatable<T>
     {

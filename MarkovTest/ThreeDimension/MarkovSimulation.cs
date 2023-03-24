@@ -1,24 +1,22 @@
 using System.Runtime.Serialization;
 using MarkovTest.Misc;
 using MarkovTest.ObjectPool;
-using MarkovTest.TwoDimension.Patterns;
-using MarkovTest.TwoDimension.Rules;
-using MarkovTest.TwoDimension.Sequences;
+using MarkovTest.ThreeDimension.Rules;
 using Newtonsoft.Json;
+using MarkovTest.ThreeDimension.Sequences;
 
-
-namespace MarkovTest.TwoDimension
+namespace MarkovTest.ThreeDimension
 {
     [Serializable]
-    public class MarkovSimulationTwoDim<T> : IResizable where T : IEquatable<T>
+    public class MarkovSimulation<T> : IResizable, IMarkovSimulation where T : IEquatable<T>
     {
         /// <summary>
         /// Invokes, when simulation changed
         /// </summary>
-        public event Action<T[,]> OnSimulationChanged = _ => { };
-        
-        [JsonIgnore] public readonly ObjectPool<List<(Vector2Int, PatternDeformation)>> CoordsPool =
-            new ObjectPool<List<(Vector2Int, PatternDeformation)>>();
+        public event Action<T[,,]> OnSimulationChanged = _ => { };
+
+        [JsonIgnore] public readonly ObjectPool<List<(Vector3Int, PatternDeformation3D)>> CoordsPool =
+            new ObjectPool<List<(Vector3Int, PatternDeformation3D)>>();
 
         [JsonProperty] public List<ISequencePlayable<T>> Playables = new List<ISequencePlayable<T>>();
 
@@ -26,30 +24,31 @@ namespace MarkovTest.TwoDimension
         /// Represents current simulation state
         /// </summary>
         [JsonIgnore]
-        public T[,] Simulation { get; private set; }
+        public T[,,] Simulation { get; private set; }
 
         /// <summary>
         /// Represents current simulation state
         /// </summary>
-        [JsonProperty] public T[,] DefaultState;
+        [JsonProperty] public T[,,] DefaultState;
 
         /// <summary>
         /// Size of the simulation
         /// </summary>
-        public Vector2Int Size => new Vector2Int(DefaultState.GetLength(0), DefaultState.GetLength(1));
+        public Vector3Int Size =>
+            new Vector3Int(DefaultState.GetLength(0), DefaultState.GetLength(1), DefaultState.GetLength(2));
 
         /// <summary>
         /// Value of the current point inside simulation
         /// </summary>
         /// <param name="x">X coord inside simulation</param>
         /// <param name="y">X coord inside simulation</param>
-        public T this[int x, int y] => Simulation[x, y];
+        public T this[int x, int y, int z] => Simulation[x, y, z];
 
         /// <summary>
         /// Value of the current point inside simulation
         /// </summary>
         /// <param name="coords">coords inside simulation</param>
-        public T this[Vector2Int coords] => Simulation[coords.X, coords.Y];
+        public T this[Vector3Int coords] => this[coords.X, coords.Y, coords.Z];
 
         /// <summary>
         /// </summary>
@@ -58,27 +57,32 @@ namespace MarkovTest.TwoDimension
         /// Seed for pseudo-random inside simulation.
         /// You can set same seed to get same results every time, or set seed to null, to get random seed
         /// </param>
-        public MarkovSimulationTwoDim(T[,] initialSimulationState)
+        public MarkovSimulation(T[,,] initialSimulationState)
         {
             DefaultState = initialSimulationState;
-            Simulation = new T[DefaultState.GetLength(0), DefaultState.GetLength(1)];
+            InitDefaultState();
+        }
+
+        private void InitDefaultState()
+        {
+            Simulation = new T[DefaultState.GetLength(0), DefaultState.GetLength(1), DefaultState.GetLength(2)];
         }
 
         [OnDeserialized]
         internal void OnDeserialized(StreamingContext context)
         {
-            Simulation = new T[DefaultState.GetLength(0), DefaultState.GetLength(1)];
+            InitDefaultState();
         }
 
-        public void Resize(Vector2Int newSize)
+        public void Resize(Vector3Int newSize)
         {
-            DefaultState = MatrixFormatter<T>.Resize(DefaultState, newSize.X, newSize.Y);
-            Simulation = new T[DefaultState.GetLength(0), DefaultState.GetLength(1)];
+            DefaultState = MatrixFormatter<T>.Resize(DefaultState, newSize.X, newSize.Y, newSize.Z);
+            InitDefaultState();
         }
 
-        public MarkovSimulationTwoDim()
+        public MarkovSimulation()
         {
-            DefaultState = new T[0, 0];
+            DefaultState = new T[0, 0, 0];
         }
 
         /// <summary>
@@ -86,26 +90,26 @@ namespace MarkovTest.TwoDimension
         /// </summary>
         /// <param name="coord">Coordinates of up left corner from place ,where stamp will placed</param>
         /// <param name="stamp">Values, that will be set in simulation</param>
-        public void Replace(Vector2Int coord, T[,] stamp)
+        public void Replace(Vector3Int coord, T[,,] stamp)
         {
             for (var x = 0; x < stamp.GetLength(0); x++)
             for (var y = 0; y < stamp.GetLength(1); y++)
-                if (!stamp[x, y].Equals(default(T)))
-                    Simulation[coord.X + x, coord.Y + y] = stamp[x, y];
+            for (var z = 0; z < stamp.GetLength(2); z++)
+                if (!stamp[x, y, z].Equals(default(T)))
+                    Simulation[coord.X + x, coord.Y + y, coord.Z + z] = stamp[x, y, z];
 
             OnSimulationChanged.Invoke(Simulation);
         }
 
 
-        public void Play(MarkovSimulationTwoDim<T> simulation, int? seed = default)
+        public void Play(int? seed = default)
         {
             var RandomFabric = seed.HasValue ? new RandomFabric(seed.Value) : new RandomFabric();
 
             Array.Copy(DefaultState, Simulation, DefaultState.Length);
             foreach (var playable in Playables)
             {
-                Thread.Sleep(100);
-                playable.Play(simulation, RandomFabric);
+                playable.Play(this, RandomFabric);
             }
         }
     }

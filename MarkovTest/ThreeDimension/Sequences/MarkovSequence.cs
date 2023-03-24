@@ -1,9 +1,6 @@
-using MarkovTest.TwoDimension.Rules;
-using Newtonsoft.Json;
-using System;
-using System.Linq;
+using MarkovTest.ThreeDimension.Rules;
 
-namespace MarkovTest.TwoDimension.Sequences
+namespace MarkovTest.ThreeDimension.Sequences
 {
     public class MarkovSequence<T> : SequenceBase<T> where T : IEquatable<T>
     {
@@ -11,7 +8,7 @@ namespace MarkovTest.TwoDimension.Sequences
         private bool _firstPlay { get; set; } = true;
 
         public MarkovSequence(){}
-        private void OnRuleApplied(Vector2Int vector2Int, PatternDeformation2D deformation)
+        private void OnRuleApplied(Vector3Int vector2Int, PatternDeformation3D deformation)
         {
             _onRuleApplied = true;
         }
