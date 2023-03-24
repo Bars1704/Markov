@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace MarkovTest.ThreeDimension.Sequences
 {
     public interface ISequence<T> : ISequencePlayable<T> where T : IEquatable<T>

@@ -1,3 +1,5 @@
+using System;
+
 namespace MarkovTest.ThreeDimension.Rules
 {
     public  struct PatternDeformation3D : IEquatable<PatternDeformation3D>
@@ -49,7 +51,7 @@ namespace MarkovTest.ThreeDimension.Rules
 
         public override int GetHashCode()
         {
-            return HashCode.Combine((int)RotationAngleX, (int)RotationAngleY, (int)RotationAngleZ, FlipX, FlipY, FlipZ);
+            return ((int)RotationAngleX, (int)RotationAngleY, (int)RotationAngleZ, FlipX, FlipY, FlipZ).GetHashCode();
         }
 
         public static bool operator ==(PatternDeformation3D left, PatternDeformation3D right)

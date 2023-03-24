@@ -1,5 +1,6 @@
+using System;
+using System.Linq;
 using MarkovTest.Misc;
-using MarkovTest.TwoDimension;
 
 namespace MarkovTest.ThreeDimension.Sequences
 {

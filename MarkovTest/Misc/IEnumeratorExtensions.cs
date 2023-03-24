@@ -1,3 +1,6 @@
+using System;
+using System.Collections.Generic;
+
 namespace MarkovTest.Misc
 {
     public static class IEnumeratorExtensions

@@ -1,3 +1,4 @@
+using System;
 using MarkovTest.Misc;
 
 namespace MarkovTest.ThreeDimension.Sequences

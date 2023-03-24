@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using MarkovTest.ThreeDimension.Rules;
 
 namespace MarkovTest.ThreeDimension.Sequences

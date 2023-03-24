@@ -1,4 +1,7 @@
 
+using System;
+using System.Collections.Generic;
+
 namespace MarkovTest.TwoDimension.Sequences
 {
     public interface ISequence<T> : ISequencePlayable<T> where T : IEquatable<T>

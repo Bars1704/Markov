@@ -1,5 +1,7 @@
 // ReSharper disable FieldCanBeMadeReadOnly.Global
 
+using System;
+
 namespace MarkovTest.ThreeDimension
 {
     /// <summary>
@@ -45,7 +47,7 @@ namespace MarkovTest.ThreeDimension
 
         public override int GetHashCode()
         {
-            return HashCode.Combine(X, Y, Z);
+            return (X, Y, Z).GetHashCode();
         }
 
         public static bool operator ==(Vector3Int left, Vector3Int right)

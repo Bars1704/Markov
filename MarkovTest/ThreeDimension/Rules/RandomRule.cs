@@ -1,3 +1,5 @@
+using System;
+using System.Linq;
 using MarkovTest.Misc;
 using MarkovTest.ThreeDimension.Patterns;
 
