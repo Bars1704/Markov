@@ -1,10 +1,10 @@
 using Newtonsoft.Json;
-using System;
 
-namespace MarkovTest.TwoDimension.Sequences
+namespace MarkovTest.Sequences
 {
     [Serializable]
-    public class CycleSequence<T> : SequenceBase<T> where T : IEquatable<T>
+    public class CycleSequence<TSimElement, TSimType> : SequenceBase<TSimElement, TSimType>
+        where TSimElement : IEquatable<TSimElement> where TSimType : IMarkovSimulation<TSimElement>
     {
         [JsonProperty] public int Cycles { get; set; }
         [JsonIgnore] public int Counter { get; private set; }
@@ -18,7 +18,7 @@ namespace MarkovTest.TwoDimension.Sequences
         {
         }
 
-        public override bool CanPlay(MarkovSimulation<T> simulation) => Counter < Cycles;
+        public override bool CanPlay(TSimType simulation) => Counter < Cycles;
 
         public override void Reset() => Counter = 0;
         public override void Init() => Counter = 0;

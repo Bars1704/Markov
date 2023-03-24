@@ -1,18 +1,15 @@
-using System;
-using System.Collections.Generic;
 using System.Runtime.Serialization;
-using System.Threading;
 using MarkovTest.Misc;
 using MarkovTest.ObjectPool;
+using MarkovTest.Sequences;
 using MarkovTest.TwoDimension.Rules;
-using MarkovTest.TwoDimension.Sequences;
 using Newtonsoft.Json;
 
 
 namespace MarkovTest.TwoDimension
 {
     [Serializable]
-    public class MarkovSimulation<T> : IResizable, IMarkovSimulation where T : IEquatable<T>
+    public class MarkovSimulation<T> : IResizable, IMarkovSimulation<T> where T : IEquatable<T>
     {
         /// <summary>
         /// Invokes, when simulation changed
@@ -22,7 +19,9 @@ namespace MarkovTest.TwoDimension
         [JsonIgnore] public readonly ObjectPool<List<(Vector2Int, PatternDeformation2D)>> CoordsPool =
             new ObjectPool<List<(Vector2Int, PatternDeformation2D)>>();
 
-        [JsonProperty] public List<ISequencePlayable<T>> Playables = new List<ISequencePlayable<T>>();
+        [JsonProperty]
+        public List<ISequencePlayable<T, MarkovSimulation<T>>> Playables =
+            new List<ISequencePlayable<T, MarkovSimulation<T>>>();
 
         /// <summary>
         /// Represents current simulation state

@@ -1,25 +1,24 @@
-using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
 using MarkovTest.Misc;
-using MarkovTest.ThreeDimension.Sequences;
+using Newtonsoft.Json;
 
-namespace MarkovTest.TwoDimension.Sequences
+namespace MarkovTest.Sequences
 {
-    public abstract class SequenceBase<T> : ISequence<T> where T : IEquatable<T>
+    public abstract class SequenceBase<TSimElement, TSimType> : ISequence<TSimElement, TSimType>
+        where TSimElement : IEquatable<TSimElement>
+        where TSimType : IMarkovSimulation<TSimElement>
     {
-        [JsonProperty] public List<ISequencePlayable<T>> Playables { get; private set; }
+        [JsonProperty] public List<ISequencePlayable<TSimElement, TSimType>> Playables { get; private set; }
 
         public event Action OnPlayed;
 
-        public void Play(MarkovSimulation<T> simulation, RandomFabric randomFabric)
+        public void Play(TSimType simulation, RandomFabric randomFabric)
         {
             Init();
             PlayOneShot(simulation, randomFabric);
             Reset();
         }
 
-        protected virtual void PlayOneShot(MarkovSimulation<T> simulation, RandomFabric randomFabric)
+        protected virtual void PlayOneShot(TSimType simulation, RandomFabric randomFabric)
         {
             while (CanPlay(simulation))
             {
@@ -36,10 +35,10 @@ namespace MarkovTest.TwoDimension.Sequences
 
         protected SequenceBase()
         {
-            Playables = new List<ISequencePlayable<T>>();
+            Playables = new List<ISequencePlayable<TSimElement, TSimType>>();
         }
 
-        public abstract bool CanPlay(MarkovSimulation<T> simulation);
+        public abstract bool CanPlay(TSimType simulation);
 
         public abstract void Reset();
 

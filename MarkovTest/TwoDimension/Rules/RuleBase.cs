@@ -1,13 +1,11 @@
-using System;
 using MarkovTest.TwoDimension.Patterns;
-using MarkovTest.TwoDimension.Sequences;
 using Newtonsoft.Json;
 using MarkovTest.Misc;
-using MarkovTest.ThreeDimension;
+using MarkovTest.Sequences;
 
 namespace MarkovTest.TwoDimension.Rules
 {
-    public abstract class RuleBase<T> : ISequencePlayable<T>, IResizable where T : IEquatable<T>
+    public abstract class RuleBase<T> : ISequencePlayable<T, MarkovSimulation<T>>, IResizable where T : IEquatable<T>
     {
         [JsonProperty] public T[,] Stamp { get; set; }
 

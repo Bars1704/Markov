@@ -1,41 +1,43 @@
+using MarkovTest.TwoDimension;
 using MarkovTest.TwoDimension.Rules;
-using Newtonsoft.Json;
-using System;
-using System.Linq;
 
-namespace MarkovTest.TwoDimension.Sequences
+namespace MarkovTest.Sequences
 {
-    public class MarkovSequence<T> : SequenceBase<T> where T : IEquatable<T>
+    public class MarkovSequence<TSimElement, TSimType> : SequenceBase<TSimElement, TSimType>
+        where TSimElement : IEquatable<TSimElement> where TSimType : IMarkovSimulation<TSimElement>
     {
         private bool _onRuleApplied { get; set; }
         private bool _firstPlay { get; set; } = true;
 
-        public MarkovSequence(){}
+        public MarkovSequence()
+        {
+        }
+
         private void OnRuleApplied(Vector2Int vector2Int, PatternDeformation2D deformation)
         {
             _onRuleApplied = true;
         }
 
-        public override bool CanPlay(MarkovSimulation<T> simulation)
+        public override bool CanPlay(TSimType simulation)
         {
             var result = _onRuleApplied || _firstPlay;
             _firstPlay = false;
             return result;
         }
 
-        private void UnsubRecursive(ISequence<T> sequence)
+        private void UnsubRecursive(ISequence<TSimElement, TSimType> sequence)
         {
-            foreach (var x in sequence.Playables.OfType<RuleBase<T>>())
+            foreach (var x in sequence.Playables.OfType<RuleBase<TSimElement>>())
                 x.OnRuleApplied -= OnRuleApplied;
-            foreach (var x in sequence.Playables.OfType<SequenceBase<T>>())
+            foreach (var x in sequence.Playables.OfType<SequenceBase<TSimElement, TSimType>>())
                 UnsubRecursive(x);
         }
 
-        private void SubRecursive(ISequence<T> sequence)
+        private void SubRecursive(ISequence<TSimElement, TSimType> sequence)
         {
-            foreach (var x in sequence.Playables.OfType<RuleBase<T>>())
+            foreach (var x in sequence.Playables.OfType<RuleBase<TSimElement>>())
                 x.OnRuleApplied += OnRuleApplied;
-            foreach (var x in sequence.Playables.OfType<SequenceBase<T>>())
+            foreach (var x in sequence.Playables.OfType<SequenceBase<TSimElement, TSimType>>())
                 SubRecursive(x);
         }
 
@@ -48,7 +50,7 @@ namespace MarkovTest.TwoDimension.Sequences
 
         public override void Init()
         {
-            foreach (var x in Playables.OfType<RuleBase<T>>())
+            foreach (var x in Playables.OfType<RuleBase<TSimElement>>())
                 x.OnRuleApplied += OnRuleApplied;
 
             SubRecursive(this);

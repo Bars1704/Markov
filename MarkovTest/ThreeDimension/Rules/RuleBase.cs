@@ -1,11 +1,11 @@
 using MarkovTest.Misc;
+using MarkovTest.Sequences;
 using MarkovTest.ThreeDimension.Patterns;
-using MarkovTest.ThreeDimension.Sequences;
 using Newtonsoft.Json;
 
 namespace MarkovTest.ThreeDimension.Rules
 {
-    public abstract class RuleBase<T> : ISequencePlayable<T>, IResizable where T : IEquatable<T>
+    public abstract class RuleBase<T> : ISequencePlayable<T,MarkovSimulation<T>>, IResizable where T : IEquatable<T>
     {
         [JsonProperty] public T[,,] Stamp { get; set; }
 

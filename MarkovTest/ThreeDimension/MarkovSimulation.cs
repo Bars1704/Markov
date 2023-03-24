@@ -1,14 +1,14 @@
 using System.Runtime.Serialization;
 using MarkovTest.Misc;
 using MarkovTest.ObjectPool;
+using MarkovTest.Sequences;
 using MarkovTest.ThreeDimension.Rules;
 using Newtonsoft.Json;
-using MarkovTest.ThreeDimension.Sequences;
 
 namespace MarkovTest.ThreeDimension
 {
     [Serializable]
-    public class MarkovSimulation<T> : IResizable, IMarkovSimulation where T : IEquatable<T>
+    public class MarkovSimulation<T> : IResizable, IMarkovSimulation<T> where T : IEquatable<T>
     {
         /// <summary>
         /// Invokes, when simulation changed
@@ -18,7 +18,7 @@ namespace MarkovTest.ThreeDimension
         [JsonIgnore] public readonly ObjectPool<List<(Vector3Int, PatternDeformation3D)>> CoordsPool =
             new ObjectPool<List<(Vector3Int, PatternDeformation3D)>>();
 
-        [JsonProperty] public List<ISequencePlayable<T>> Playables = new List<ISequencePlayable<T>>();
+        [JsonProperty] public List<ISequencePlayable<T,MarkovSimulation<T>>> Playables = new List<ISequencePlayable<T,MarkovSimulation<T>>>();
 
         /// <summary>
         /// Represents current simulation state
