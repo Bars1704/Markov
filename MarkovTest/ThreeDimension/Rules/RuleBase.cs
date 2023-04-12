@@ -22,7 +22,7 @@ namespace MarkovTest.ThreeDimension.Rules
         protected RuleBase()
         {
             MainPattern = new Pattern<T>();
-            Stamp = new T[0, 0, 0];
+            Stamp = new T[1, 1, 1];
         }
 
         protected void ApplyRuleEvent(Vector3Int coord, PatternDeformation3D rotationSettings)

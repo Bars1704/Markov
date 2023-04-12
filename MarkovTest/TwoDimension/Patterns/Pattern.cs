@@ -15,7 +15,7 @@ namespace MarkovTest.TwoDimension.Patterns
     /// <typeparam name="T"></typeparam>
     public class Pattern<T> : IResizable where T : IEquatable<T>
     {
-        [JsonConverter(typeof(PatternConverter))]
+        [JsonConverter(typeof(PatternConverter2D))]
         public IEquatable<T>[,] PatternForm { get; set; }
 
         [JsonProperty] public RotationSettingsFlags RotationSettings { get; set; }

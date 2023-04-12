@@ -31,7 +31,7 @@ namespace MarkovTest.ThreeDimension
         /// <summary>
         /// Represents current simulation state
         /// </summary>
-        [JsonProperty] public T[,,] DefaultState;
+         public T[,,] DefaultState;
 
         /// <summary>
         /// Size of the simulation
@@ -84,7 +84,7 @@ namespace MarkovTest.ThreeDimension
 
         public MarkovSimulation()
         {
-            DefaultState = new T[0, 0, 0];
+            DefaultState = new T[1, 1, 1];
         }
 
         /// <summary>

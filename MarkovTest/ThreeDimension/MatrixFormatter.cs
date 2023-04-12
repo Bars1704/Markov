@@ -29,10 +29,10 @@ namespace MarkovTest.ThreeDimension
             var sizeY = matrix.GetLength(1);
             var sizeZ = matrix.GetLength(2);
 
-            for (var x = 0; x < sizeX; x++)
-            for (var y = 0; y < sizeY / 2; y++)
+            for (var x = 0; x < sizeX / 2; x++)
+            for (var y = 0; y < sizeY; y++)
             for (var z = 0; z < sizeZ; z++)
-                (matrix[x, y, z], matrix[x, sizeY - y - 1, z]) = (matrix[x, sizeY - y - 1, z], matrix[x, y, z]);
+                (matrix[sizeX - x - 1, y, z], matrix[x, y, z]) = (matrix[sizeX - x - 1, y, z], matrix[x, y, z]);
         }
 
         public static T[,,] MirrorX(T[,,] matrix)
@@ -55,10 +55,10 @@ namespace MarkovTest.ThreeDimension
             var sizeY = matrix.GetLength(1);
             var sizeZ = matrix.GetLength(2);
 
-            for (var x = 0; x < sizeX / 2; x++)
-            for (var y = 0; y < sizeY; y++)
+            for (var x = 0; x < sizeX; x++)
+            for (var y = 0; y < sizeY / 2; y++)
             for (var z = 0; z < sizeZ; z++)
-                (matrix[x, y, z], matrix[sizeX - x - 1, y, z]) = (matrix[sizeX - x - 1, y, z], matrix[x, y, z]);
+                (matrix[x, y, z], matrix[x, sizeY - y - 1, z]) = (matrix[x, sizeY - y - 1, z], matrix[x, y, z]);
         }
 
 
@@ -83,10 +83,10 @@ namespace MarkovTest.ThreeDimension
             var sizeY = matrix.GetLength(1);
             var sizeZ = matrix.GetLength(2);
 
-            for (var x = 0; x < sizeX / 2; x++)
+            for (var x = 0; x < sizeX; x++)
             for (var y = 0; y < sizeY; y++)
-            for (var z = 0; z < sizeZ; z++)
-                (matrix[x, y, z], matrix[sizeX - x - 1, y, z]) = (matrix[sizeX - x - 1, y, z], matrix[x, y, z]);
+            for (var z = 0; z < sizeZ / 2; z++)
+                (matrix[x, y, z], matrix[x, y, sizeZ - z - 1]) = (matrix[x, y, sizeZ - z - 1], matrix[x, y, z]);
         }
 
 
@@ -99,7 +99,7 @@ namespace MarkovTest.ThreeDimension
             var copy = new T[sizeX, sizeY, sizeZ];
             Array.Copy(matrix, copy, matrix.Length);
 
-            MirrorNonAllocY(copy);
+            MirrorNonAllocZ(copy);
 
             return copy;
         }

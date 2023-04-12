@@ -15,7 +15,7 @@ namespace MarkovTest.ThreeDimension.Patterns
     /// <typeparam name="T"></typeparam>
     public class Pattern<T> : IResizable where T : IEquatable<T>
     {
-        [JsonConverter(typeof(PatternConverter))]
+        [JsonConverter(typeof(PatternConverter3D))]
         public IEquatable<T>[,,] PatternForm { get; set; }
 
         [JsonProperty] public RotationSettingsFlags RotationSettings { get; set; }
@@ -33,7 +33,7 @@ namespace MarkovTest.ThreeDimension.Patterns
 
         public Pattern()
         {
-            PatternForm = new IEquatable<T>[0, 0, 0];
+            PatternForm = new IEquatable<T>[1, 1, 1];
             RotationSettings = RotationSettingsFlags.None;
         }
 

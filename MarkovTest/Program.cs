@@ -21,7 +21,7 @@ namespace MarkovTest
             var simulation = SimulationFabric.Labirynth();
             var serializeObject = SimulationSerializer.SerializeSim(simulation);
             File.WriteAllText("C:\\Users\\Maks\\Desktop\\Sim.json", serializeObject);
-            simulation = SimulationSerializer.DeserializeSim<byte>(serializeObject);
+            simulation = SimulationSerializer.DeserializeSim2D(serializeObject);
             simulation.OnSimulationChanged += x => PrintMatrix(x);
             simulation.Play();
         }

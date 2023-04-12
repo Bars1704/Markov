@@ -82,7 +82,7 @@ namespace MarkovTest.TwoDimension
 
         public MarkovSimulation()
         {
-            DefaultState = new T[0, 0];
+            DefaultState = new T[1, 1];
         }
 
         /// <summary>

@@ -8,7 +8,7 @@ using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
 namespace MarkovTest.Converters
 {
-    public class PatternConverter : JsonConverter
+    public class PatternConverter2D : JsonConverter
     {
         public override void WriteJson(JsonWriter writer, object? value, JsonSerializer serializer)
         {
