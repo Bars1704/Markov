@@ -1,13 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
-using MarkovTest.Misc;
-using MarkovTest.ObjectPool;
-using MarkovTest.Sequences;
-using MarkovTest.ThreeDimension.Rules;
+using Markov.MarkovTest.Misc;
+using Markov.MarkovTest.ObjectPool;
+using Markov.MarkovTest.Sequences;
+using Markov.MarkovTest.ThreeDimension.Rules;
 using Newtonsoft.Json;
 
-namespace MarkovTest.ThreeDimension
+namespace Markov.MarkovTest.ThreeDimension
 {
     [Serializable]
     public class MarkovSimulation<T> : IResizable, IMarkovSimulation<T> where T : IEquatable<T>

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MarkovTest.ObjectPool
+namespace Markov.MarkovTest.ObjectPool
 {
     /// <summary>
     /// Object Pool pattern realisation. Stores some instances of items,

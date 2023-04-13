@@ -1,6 +1,6 @@
 using System;
 
-namespace MarkovTest.ThreeDimension.Rules
+namespace Markov.MarkovTest.ThreeDimension.Rules
 {
     public  struct PatternDeformation3D : IEquatable<PatternDeformation3D>
     {

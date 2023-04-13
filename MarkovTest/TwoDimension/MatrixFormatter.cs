@@ -1,6 +1,6 @@
 using System;
 
-namespace MarkovTest
+namespace Markov.MarkovTest.TwoDimension
 {
     /// <summary>
     /// Contains methods to deform matrix, like rotating or mirroring

@@ -1,7 +1,6 @@
-using MarkovTest.TwoDimension.Patterns;
 using System;
 
-namespace MarkovTest.TwoDimension.Rules
+namespace Markov.MarkovTest.TwoDimension.Rules
 {
     public readonly struct PatternDeformation2D : IEquatable<PatternDeformation2D>
     {

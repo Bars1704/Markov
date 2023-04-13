@@ -1,4 +1,4 @@
-namespace MarkovTest.TwoDimension
+namespace Markov.MarkovTest.TwoDimension
 {
     public interface IResizable
     {

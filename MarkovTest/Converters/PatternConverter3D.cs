@@ -5,7 +5,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
-namespace MarkovTest.Converters
+namespace Markov.MarkovTest.Converters
 {
     public class PatternConverter3D : JsonConverter
     {

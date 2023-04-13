@@ -1,10 +1,9 @@
 using System;
 using System.Linq;
-using MarkovTest.Misc;
-using MarkovTest.ThreeDimension.Patterns;
+using Markov.MarkovTest.Misc;
+using Markov.MarkovTest.ThreeDimension.Patterns;
 
-
-namespace MarkovTest.ThreeDimension.Rules
+namespace Markov.MarkovTest.ThreeDimension.Rules
 {
     public class RandomRule<T> : RuleBase<T> where T : IEquatable<T>
     {

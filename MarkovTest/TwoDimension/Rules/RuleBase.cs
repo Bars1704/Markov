@@ -1,10 +1,10 @@
 using System;
-using MarkovTest.TwoDimension.Patterns;
+using Markov.MarkovTest.Misc;
+using Markov.MarkovTest.Sequences;
+using Markov.MarkovTest.TwoDimension.Patterns;
 using Newtonsoft.Json;
-using MarkovTest.Misc;
-using MarkovTest.Sequences;
 
-namespace MarkovTest.TwoDimension.Rules
+namespace Markov.MarkovTest.TwoDimension.Rules
 {
     public abstract class RuleBase<T> : ISequencePlayable<T, MarkovSimulation<T>>, IResizable where T : IEquatable<T>
     {

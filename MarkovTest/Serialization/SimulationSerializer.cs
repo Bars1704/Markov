@@ -1,9 +1,9 @@
 using Newtonsoft.Json;
-using MarkovSimulation2D = MarkovTest.TwoDimension.MarkovSimulation<byte>;
-using MarkovSimulation3D = MarkovTest.ThreeDimension.MarkovSimulation<byte>;
+using MarkovSimulation2D = Markov.MarkovTest.TwoDimension.MarkovSimulation<byte>;
+using MarkovSimulation3D = Markov.MarkovTest.ThreeDimension.MarkovSimulation<byte>;
 
 
-namespace MarkovTest.Serialization
+namespace Markov.MarkovTest.Serialization
 {
     public static class SimulationSerializer
     {

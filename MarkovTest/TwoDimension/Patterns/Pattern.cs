@@ -2,11 +2,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.Serialization;
-using MarkovTest.Converters;
-using MarkovTest.TwoDimension.Rules;
+using Markov.MarkovTest.Converters;
+using Markov.MarkovTest.TwoDimension.Rules;
 using Newtonsoft.Json;
 
-namespace MarkovTest.TwoDimension.Patterns
+namespace Markov.MarkovTest.TwoDimension.Patterns
 {
     //TODO: подумать, как сделать тут абстракцию
     /// <summary>

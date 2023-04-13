@@ -1,4 +1,4 @@
-namespace MarkovTest.ObjectPool
+namespace Markov.MarkovTest.ObjectPool
 {
     /// <summary>
     /// Container for element, stored in ObjectPool

@@ -1,7 +1,7 @@
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
-namespace MarkovTest
+namespace Markov.MarkovTest
 {
     /// <summary>
     /// Represents rotation angle

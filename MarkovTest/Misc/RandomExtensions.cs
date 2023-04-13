@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace MarkovTest.Misc
+namespace Markov.MarkovTest.Misc
 {
     public static class RandomExtensions
     {

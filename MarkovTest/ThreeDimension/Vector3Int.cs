@@ -2,7 +2,7 @@
 
 using System;
 
-namespace MarkovTest.ThreeDimension
+namespace Markov.MarkovTest.ThreeDimension
 {
     /// <summary>
     /// Structure,that contains 3 integer values, represents coordinates in 3-dimensional space

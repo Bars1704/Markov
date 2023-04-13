@@ -1,6 +1,6 @@
 using System;
 
-namespace MarkovTest.Misc
+namespace Markov.MarkovTest.Misc
 {
     /// <summary>
     /// Represents a pseudo-random <see cref="Random"/> instances generator, which is an algorithm that produces

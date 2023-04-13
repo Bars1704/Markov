@@ -1,6 +1,6 @@
 using System;
 
-namespace MarkovTest.ThreeDimension.Rules
+namespace Markov.MarkovTest.ThreeDimension.Rules
 {
     [Flags]
     public enum RotationSettingsFlags

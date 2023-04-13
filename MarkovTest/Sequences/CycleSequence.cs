@@ -1,7 +1,7 @@
 using System;
 using Newtonsoft.Json;
 
-namespace MarkovTest.Sequences
+namespace Markov.MarkovTest.Sequences
 {
     [Serializable]
     public class CycleSequence<TSimElement, TSimType> : SequenceBase<TSimElement, TSimType>

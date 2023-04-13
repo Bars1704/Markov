@@ -1,9 +1,8 @@
 using System;
-using MarkovTest.Misc;
-using MarkovTest.ThreeDimension.Patterns;
+using Markov.MarkovTest.Misc;
+using Markov.MarkovTest.ThreeDimension.Patterns;
 
-
-namespace MarkovTest.ThreeDimension.Rules
+namespace Markov.MarkovTest.ThreeDimension.Rules
 {
     [Serializable]
     public class AllRule<T> : RuleBase<T> where T : IEquatable<T>

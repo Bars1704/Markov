@@ -2,14 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Runtime.Serialization;
 using System.Threading;
-using MarkovTest.Misc;
-using MarkovTest.ObjectPool;
-using MarkovTest.Sequences;
-using MarkovTest.TwoDimension.Rules;
+using Markov.MarkovTest.Misc;
+using Markov.MarkovTest.ObjectPool;
+using Markov.MarkovTest.Sequences;
+using Markov.MarkovTest.TwoDimension.Rules;
 using Newtonsoft.Json;
 
-
-namespace MarkovTest.TwoDimension
+namespace Markov.MarkovTest.TwoDimension
 {
     [Serializable]
     public class MarkovSimulation<T> : IResizable, IMarkovSimulation<T> where T : IEquatable<T>

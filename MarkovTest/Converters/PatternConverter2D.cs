@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 using JsonException = Newtonsoft.Json.JsonException;
 using JsonSerializer = Newtonsoft.Json.JsonSerializer;
 
-namespace MarkovTest.Converters
+namespace Markov.MarkovTest.Converters
 {
     public class PatternConverter2D : JsonConverter
     {

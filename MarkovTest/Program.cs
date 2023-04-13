@@ -1,13 +1,9 @@
-﻿using MarkovTest.TwoDimension;
-using MarkovTest.TwoDimension.Patterns;
-using MarkovTest.TwoDimension.Rules;
-using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
-using MarkovTest.Serialization;
+using Markov.MarkovTest.Serialization;
 
-namespace MarkovTest
+namespace Markov.MarkovTest
 {
     public class Program
     {

@@ -1,4 +1,4 @@
-namespace MarkovTest.ThreeDimension
+namespace Markov.MarkovTest.ThreeDimension
 {
     public interface IResizable
     {

@@ -1,10 +1,10 @@
 using System;
-using MarkovTest.Sequences;
-using MarkovTest.TwoDimension;
-using MarkovTest.TwoDimension.Patterns;
-using MarkovTest.TwoDimension.Rules;
+using Markov.MarkovTest.Sequences;
+using Markov.MarkovTest.TwoDimension;
+using Markov.MarkovTest.TwoDimension.Patterns;
+using Markov.MarkovTest.TwoDimension.Rules;
 
-namespace MarkovTest
+namespace Markov.MarkovTest
 {
     public class SimulationFabric
     {

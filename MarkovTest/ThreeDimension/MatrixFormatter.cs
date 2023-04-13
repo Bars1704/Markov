@@ -1,6 +1,6 @@
 using System;
 
-namespace MarkovTest.ThreeDimension
+namespace Markov.MarkovTest.ThreeDimension
 {
     /// <summary>
     /// Contains methods to deform matrix, like rotating or mirroring

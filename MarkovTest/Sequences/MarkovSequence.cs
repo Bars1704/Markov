@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
-using MarkovTest.TwoDimension;
-using MarkovTest.TwoDimension.Rules;
+using Markov.MarkovTest.TwoDimension;
+using Markov.MarkovTest.TwoDimension.Rules;
 
-namespace MarkovTest.Sequences
+namespace Markov.MarkovTest.Sequences
 {
     public class MarkovSequence<TSimElement, TSimType> : SequenceBase<TSimElement, TSimType>
         where TSimElement : IEquatable<TSimElement> where TSimType : IMarkovSimulation<TSimElement>

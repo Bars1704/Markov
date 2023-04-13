@@ -1,6 +1,6 @@
 using System;
 
-namespace MarkovTest
+namespace Markov.MarkovTest
 {
     public interface IMarkovSimulation<T> where T : IEquatable<T>
     {

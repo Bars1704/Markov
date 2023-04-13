@@ -1,9 +1,9 @@
 using System;
 using System.Linq;
-using MarkovTest.TwoDimension.Patterns;
-using MarkovTest.Misc;
+using Markov.MarkovTest.Misc;
+using Markov.MarkovTest.TwoDimension.Patterns;
 
-namespace MarkovTest.TwoDimension.Rules
+namespace Markov.MarkovTest.TwoDimension.Rules
 {
     public class RandomRule<T> : RuleBase<T> where T : IEquatable<T>
     {

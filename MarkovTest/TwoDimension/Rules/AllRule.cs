@@ -1,8 +1,8 @@
 using System;
-using MarkovTest.TwoDimension.Patterns;
-using MarkovTest.Misc;
+using Markov.MarkovTest.Misc;
+using Markov.MarkovTest.TwoDimension.Patterns;
 
-namespace MarkovTest.TwoDimension.Rules
+namespace Markov.MarkovTest.TwoDimension.Rules
 {
     [Serializable]
     public class AllRule<T> : RuleBase<T> where T : IEquatable<T>

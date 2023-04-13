@@ -1,6 +1,6 @@
 using System;
 
-namespace MarkovTest.TwoDimension.Rules
+namespace Markov.MarkovTest.TwoDimension.Rules
 {
     [Flags]
     public enum RotationSettingsFlags

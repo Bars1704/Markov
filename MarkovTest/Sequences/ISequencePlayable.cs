@@ -1,7 +1,7 @@
 using System;
-using MarkovTest.Misc;
+using Markov.MarkovTest.Misc;
 
-namespace MarkovTest.Sequences
+namespace Markov.MarkovTest.Sequences
 {
     public interface ISequencePlayable<TSimElement, in TSimType>
         where TSimElement : IEquatable<TSimElement>

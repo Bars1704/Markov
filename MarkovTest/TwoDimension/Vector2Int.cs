@@ -2,7 +2,7 @@
 
 using System;
 
-namespace MarkovTest.TwoDimension
+namespace Markov.MarkovTest.TwoDimension
 {
     /// <summary>
     /// Structure,that contains 2 integer values, represents coordinates in 2-dimensional space

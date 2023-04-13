@@ -1,8 +1,8 @@
 using System;
 using System.Linq;
-using MarkovTest.Misc;
+using Markov.MarkovTest.Misc;
 
-namespace MarkovTest.Sequences
+namespace Markov.MarkovTest.Sequences
 {
     public class SelectRandomSequence<TSimElement, TSimType> : SequenceBase<TSimElement, TSimType>
         where TSimElement : IEquatable<TSimElement> where TSimType : IMarkovSimulation<TSimElement>

@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
-using MarkovTest.Misc;
+using Markov.MarkovTest.Misc;
 using Newtonsoft.Json;
 
-namespace MarkovTest.Sequences
+namespace Markov.MarkovTest.Sequences
 {
     public abstract class SequenceBase<TSimElement, TSimType> : ISequence<TSimElement, TSimType>
         where TSimElement : IEquatable<TSimElement>
