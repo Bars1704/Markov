@@ -50,21 +50,21 @@ namespace Markov.MarkovTest.TwoDimension.Patterns
         /// <param name="simulation">Checked simulation</param>
         /// <param name="coord">Checked coords (top-left corner)</param>
         /// <returns>True if there is given pattern in given coords, false if not</returns>
-        public virtual bool Compare(MarkovSimulation<T> simulation, Vector2Int coord)
+        public virtual bool Compare(IEquatable<T>[,] pattern, MarkovSimulation<T> simulation, Vector2Int coord)
         {
-            if (simulation.Size.X <= coord.X + PatternForm.GetLength(0) - 1)
+            if (simulation.Size.X <= coord.X + pattern.GetLength(0))
                 return false;
 
-            if (simulation.Size.Y <= coord.Y + PatternForm.GetLength(1) - 1)
+            if (simulation.Size.Y <= coord.Y + pattern.GetLength(1))
                 return false;
 
-            for (var x = 0; x < PatternForm.GetLength(0); x++)
+            for (var x = 0; x < pattern.GetLength(0); x++)
             {
-                for (var y = 0; y < PatternForm.GetLength(1); y++)
+                for (var y = 0; y < pattern.GetLength(1); y++)
                 {
-                    var flag = simulation[coord.X + x, coord.Y + y].Equals(PatternForm[x, y]) ||
+                    var flag = simulation[coord.X + x, coord.Y + y].Equals(pattern[x, y]) ||
                                simulation[coord.X + x, coord.Y + y].Equals(default(T)) ||
-                               PatternForm[x, y].Equals(default(T));
+                               pattern[x, y].Equals(default(T));
 
                     if (!flag)
                         return false;
@@ -100,11 +100,10 @@ namespace Markov.MarkovTest.TwoDimension.Patterns
             yield return Rotate(RotationAngle.Degrees270);
         }
 
-        public IEnumerable<(Vector2Int coord, PatternDeformation2D RotationSettings)> GetAllCoords(MarkovSimulation<T> simulation)
+        public IEnumerable<(Vector2Int coord, PatternDeformation2D RotationSettings)> GetAllCoords(
+            MarkovSimulation<T> simulation)
         {
-            return Patterns.SelectMany(x =>
-                GetPatternCoords(simulation)
-                    .Select(y => (coord: y, RotationSettings: x.Key)));
+            return Patterns.SelectMany(x => GetPatternCoords(x.Value, simulation).Select(y => (y, x.Key)));
         }
 
 
@@ -113,14 +112,14 @@ namespace Markov.MarkovTest.TwoDimension.Patterns
         /// </summary>
         /// <param name="pattern">Pattens, that will be checked</param>
         /// <returns> Coordinates, that matches to pattern</returns>
-        public IEnumerable<Vector2Int> GetPatternCoords(MarkovSimulation<T> simulation)
+        public IEnumerable<Vector2Int> GetPatternCoords(IEquatable<T>[,] pattern, MarkovSimulation<T> simulation)
         {
             for (var x = 0; x < simulation.Simulation.GetLength(0); x++)
             {
                 for (var y = 0; y < simulation.Simulation.GetLength(1); y++)
                 {
                     var coord = new Vector2Int(x, y);
-                    if (Compare(simulation, coord))
+                    if (Compare(pattern, simulation, coord))
                         yield return coord;
                 }
             }
@@ -143,7 +142,7 @@ namespace Markov.MarkovTest.TwoDimension.Patterns
                 {
                     var (s, p) = (pattern.Key, pattern.Value);
                     var settingsCopy = new PatternDeformation2D(s.RotationAngle, true, s.FlipY);
-                    var copy = MatrixFormatter<IEquatable<T>>.MirrorX(PatternForm);
+                    var copy = MatrixFormatter<IEquatable<T>>.MirrorX(p);
                     patternList.Add((settingsCopy, copy));
                 }
 
@@ -155,7 +154,7 @@ namespace Markov.MarkovTest.TwoDimension.Patterns
                 {
                     var (s, p) = (pattern.Key, pattern.Value);
                     var settingsCopy = new PatternDeformation2D(s.RotationAngle, s.FlipX, true);
-                    var copy = MatrixFormatter<IEquatable<T>>.MirrorY(PatternForm);
+                    var copy = MatrixFormatter<IEquatable<T>>.MirrorY(p);
                     patternList.Add((settingsCopy, copy));
                 }
 

@@ -55,10 +55,10 @@ namespace Markov.MarkovTest
             return simulation;
         }
 
-        public static MarkovSimulation<byte> Labirynth()
+        public static MarkovSimulation<byte> Labirynth(int size = 21)
         {
-            var startMap = CreateMatrixOfType<byte>(21, 21, 1);
-            startMap[6, 6] = 2;
+            var startMap = CreateMatrixOfType<byte>(size, size, 1);
+            startMap[size/2, size/2] = 2;
 
 
             var simulation = new MarkovSimulation<byte>(startMap);
@@ -69,7 +69,7 @@ namespace Markov.MarkovTest
             var pattern = new IEquatable<byte>[,]
                 { { (byte)2, (byte)1, (byte)1 } };
             sequence.Playables.Add(
-                new RandomRule<byte>(new Pattern<byte>(pattern, RotationSettingsFlagsExtensions.All()), stamp));
+                new RandomRule<byte>(new Pattern<byte>(pattern, RotationSettingsFlags.Rotate), stamp));
 
             var sequence1 = new MarkovSequence<byte, MarkovSimulation<byte>>();
             var stamp1 = new byte[,] { { (byte)2 } };
@@ -85,13 +85,13 @@ namespace Markov.MarkovTest
             var stamp3 = new byte[,] { { (byte)4, (byte)4, } };
             var pattern3 = new IEquatable<byte>[,] { { (byte)4, (byte)1 } };
             sequence3.Playables.Add(
-                new RandomRule<byte>(new Pattern<byte>(pattern3, RotationSettingsFlagsExtensions.All()), stamp3));
+                new RandomRule<byte>(new Pattern<byte>(pattern3, RotationSettingsFlags.Rotate), stamp3));
 
             var sequence4 = new CycleSequence<byte, MarkovSimulation<byte>>(1);
             var stamp4 = new byte[,] { { (byte)4, (byte)4, (byte)4, } };
             var pattern4 = new IEquatable<byte>[,] { { (byte)4, (byte)2, (byte)1 } };
             sequence4.Playables.Add(
-                new RandomRule<byte>(new Pattern<byte>(pattern4, RotationSettingsFlagsExtensions.All()), stamp4));
+                new RandomRule<byte>(new Pattern<byte>(pattern4,RotationSettingsFlags.Rotate), stamp4));
 
             var sequence5 = new MarkovSequence<byte, MarkovSimulation<byte>>();
             sequence5.Playables.Add(sequence3);
