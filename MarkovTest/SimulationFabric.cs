@@ -102,6 +102,7 @@ namespace Markov.MarkovTest
             var pattern6 = new IEquatable<byte>[,] { { (byte)4 } };
             sequence6.Playables.Add(new AllRule<byte>(new Pattern<byte>(pattern6, default), stamp6));
 
+            
             simulation.Playables.Add(sequence);
             simulation.Playables.Add(sequence1);
             simulation.Playables.Add(sequence2);
