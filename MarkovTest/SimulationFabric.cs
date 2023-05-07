@@ -92,7 +92,6 @@ namespace Markov.MarkovTest
             var pattern4 = new IEquatable<byte>[,] { { (byte)4, (byte)2, (byte)1 } };
             sequence4.Playables.Add(
                 new RandomRule<byte>(new Pattern<byte>(pattern4,RotationSettingsFlags.Rotate), stamp4));
-
             
             var sequence5 = new MarkovSequence<byte, MarkovSimulation<byte>>();
             sequence5.Playables.Add(sequence3);
